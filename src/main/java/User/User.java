@@ -1,5 +1,7 @@
-package Entities;
+package User;
 
+import Entities.Geschlecht;
+import Entities.Interest;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
