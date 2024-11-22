@@ -1,8 +1,9 @@
-package Entities;
+package com.mm.munichmatcher.Entities;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
 
-@Entity
+
 public enum Interest {
     Sport,
     Musik,
@@ -29,5 +30,5 @@ public enum Interest {
     Familie,
     Freunde,
     Liebe,
-    Sonstiges
+    Sonstiges;
 }

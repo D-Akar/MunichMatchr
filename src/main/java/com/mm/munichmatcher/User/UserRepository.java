@@ -1,4 +1,4 @@
-package User;
+package com.mm.munichmatcher.User;
 
 import org.springframework.data.repository.CrudRepository;
 

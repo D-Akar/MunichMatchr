@@ -1,8 +1,8 @@
-package Entities;
+package com.mm.munichmatcher.Entities;
 
 import jakarta.persistence.Entity;
 
-@Entity
+
 public class Organisation {
 
 }

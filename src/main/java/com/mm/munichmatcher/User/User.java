@@ -1,7 +1,7 @@
-package User;
+package com.mm.munichmatcher.User;
 
-import Entities.Geschlecht;
-import Entities.Interest;
+import com.mm.munichmatcher.Entities.Geschlecht;
+import com.mm.munichmatcher.Entities.Interest;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
@@ -23,7 +23,7 @@ public class User {
     private int age;
     private Geschlecht geschlecht;
 
-    @OneToMany
-    private List<Interest> interest;
+    //@OneToMany
+    //private List<Interest> interest;
 
 }

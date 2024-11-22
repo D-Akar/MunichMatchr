@@ -1,4 +1,4 @@
-package Entities;
+package com.mm.munichmatcher.Entities;
 
 public enum Geschlecht {
     Männlich,
