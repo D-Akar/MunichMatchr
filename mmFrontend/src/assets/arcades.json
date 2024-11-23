@@ -1,5 +1,46 @@
 [
-    { "name": "Arcade 1", "lat": 48.1351, "lng": 11.5820 },
-    { "name": "Arcade 2", "lat": 51.515, "lng": -0.1 },
-    { "name": "Arcade 3", "lat": 51.525, "lng": -0.08 }
+    { "name": "Arcade 1", 
+      "lat": 48.1351, 
+      "lng": 11.5820,
+      "description": "Organization thats really nice :)",
+      "details": {
+        "interestFields": [
+          "Literature",
+          "Sports"
+        ],
+        "languages":[],
+        "events": [],
+        "accessability": [],
+        "timeCommitment" : []
+      }
+    },
+    { "name": "Arcade 2", 
+      "lat": 51.515, 
+      "lng": -0.1,
+      "description": "Organization thats really nice :)",
+      "details": {
+        "interestFields": [
+          "Literature",
+          "Sports"
+        ],
+        "languages":[],
+        "events": [],
+        "accessability": [],
+        "timeCommitment" : []
+      }
+    },
+    { "name": "Arcade 3", 
+      "lat": 51.525, 
+      "lng": -0.08,
+      "description": "Organization thats really nice :)",
+      "details": {
+        "interestFields": [
+          "Literature",
+          "Sports"
+        ],
+        "languages":[],
+        "events": [],
+        "accessability": [],
+        "timeCommitment" : []
+      } }
   ]

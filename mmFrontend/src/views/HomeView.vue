@@ -1,5 +1,6 @@
 <script setup>
 import HeaderBlock from "@/components/HeaderBlock.vue";
+import PopupContent from "@/components/PopupContent.vue";
 
 import { ref } from "vue";
 import {
@@ -330,7 +331,8 @@ const mobileFiltersOpen = ref(false);
                       :key="index"
                       :lat-lng="[arcade.lat, arcade.lng]"
                     >
-                      <l-popup>{{ arcade.name }}</l-popup>
+                      <!-- <l-popup>{{ arcade.name }}</l-popup> -->
+                      <l-popup :title = arcade.name :details = arcade.description></l-popup>
                     </l-marker>
                   </l-map>
                 </div>
