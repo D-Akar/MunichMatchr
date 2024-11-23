@@ -165,16 +165,11 @@
             <div class="grid grid-cols-1 gap-x-8 gap-y-10 lg:grid-cols-4">
               <!-- Filters -->
               <form class="hidden lg:block">
-                <h3 class="sr-only">Categories</h3>
-                <ul
-                  role="list"
-                  class="space-y-4 border-b border-gray-200 pb-6 text-sm font-medium text-gray-900"
-                >
-                  <li v-for="category in subCategories" :key="category.name">
-                    <a :href="category.href">{{ category.name }}</a>
-                  </li>
-                </ul>
-
+                <h3 class="text-md font-bold text-gray-900 pb-2">Your Location</h3>
+                <div>
+                  <label for="email" class="sr-only">Email</label>
+                  <input type="email" name="email" id="email" class="block w-full rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm/6" placeholder="Musterstraße 10" />
+                </div>
                 <Disclosure
                   as="div"
                   v-for="section in filters"
@@ -261,72 +256,6 @@
         </main>
       </div>
     </div>
-    <!-- <div
-      v-if="showPreferencesPopup"
-      class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-100"
-    >
-      <div class="bg-white shadow sm:rounded-lg">
-        <div class="px-4 py-5 sm:p-6">
-          <h3 class="text-base font-semibold text-gray-900">
-            Tell us more about yourself!
-          </h3>
-          <div class="mt-2 max-w-xl text-sm text-gray-500">
-            <p>Please be sure to select at least one item in each category.</p>
-            <div>
-              <div class="sm:hidden">
-                <label for="tabs" class="sr-only">Select a tab</label>
-                
-                <select
-                  id="tabs"
-                  name="tabs"
-                  class="block w-full rounded-md border-gray-300 focus:border-indigo-500 focus:ring-indigo-500"
-                >
-                  <option v-for="tab in tabs" :key="tab.name" :selected="tab.current">
-                    {{ tab.name }}
-                  </option>
-                </select>
-              </div>
-              <div class="hidden sm:block">
-                <nav
-                  class="isolate flex divide-x divide-gray-200 rounded-lg shadow"
-                  aria-label="Tabs"
-                >
-                  <a
-                    v-for="(tab, tabIdx) in tabs"
-                    :key="tab.name"
-                    :href="tab.href"
-                    :class="[
-                      tab.current ? 'text-gray-900' : 'text-gray-500 hover:text-gray-700',
-                      tabIdx === 0 ? 'rounded-l-lg' : '',
-                      tabIdx === tabs.length - 1 ? 'rounded-r-lg' : '',
-                      'group relative min-w-0 flex-1 overflow-hidden bg-white px-4 py-4 text-center text-sm font-medium hover:bg-gray-50 focus:z-10',
-                    ]"
-                    :aria-current="tab.current ? 'page' : undefined"
-                  >
-                    <span>{{ tab.name }}</span>
-                    <span
-                      aria-hidden="true"
-                      :class="[
-                        tab.current ? 'bg-indigo-500' : 'bg-transparent',
-                        'absolute inset-x-0 bottom-0 h-0.5',
-                      ]"
-                    />
-                  </a>
-                </nav>
-              </div>
-            </div>
-          </div>
-          <div class="mt-5">
-            <button
-              type="button"
-              class="inline-flex items-center rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500"
-            >
-              Submit
-            </button>
-          </div>
-        </div>
-      </div>
-    </div> -->
   </main>
 </template>
 
@@ -362,6 +291,7 @@ import { LMap, LTileLayer, LMarker, LPopup } from "@vue-leaflet/vue-leaflet";
 import arcades from "@/assets/arcades.json";
 
 const selectedFilters = reactive({
+  categories: [],
   availability: [],
   interestFields: [],
   languages: [],
@@ -409,12 +339,17 @@ watch(
   { deep: true } // Ensures nested properties are observed
 );
 
-const subCategories = [
-  { name: "Youth group/outreach program", href: "#" },
-  { name: "Retirement home", href: "#" },
-  { name: "Care facility", href: "#" },
-];
+
 const filters = [
+  {
+    id: "categories",
+    name: "Categories",
+    options: [
+      { value: "1hour", label: "Language Cafes", checked: false },
+      { value: "multiHour", label: "Youth Institute", checked: false },
+      { value: "fullDay", label: "Elderly Care Facility", checked: true },
+    ],
+  },
   {
     id: "availability",
     name: "Availability",
@@ -456,13 +391,6 @@ const filters = [
       { value: "publicTransport", label: "Public transportation nearby", checked: false },
     ],
   },
-];
-
-const tabs = [
-  { name: "My Account", href: "#", current: true },
-  { name: "Company", href: "#", current: false },
-  { name: "Team Members", href: "#", current: false },
-  { name: "Billing", href: "#", current: false },
 ];
 
 const mobileFiltersOpen = ref(false);
@@ -523,7 +451,7 @@ const handleFilterChange = (sectionId, value, checked) => {
 }
 
 .leaflet-popup-content-wrapper {
-  width: 200px;
+  width: 300px;
 }
 
 .z-100 {

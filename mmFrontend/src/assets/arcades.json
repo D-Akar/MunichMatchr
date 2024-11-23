@@ -10,7 +10,7 @@
         "availability": ["1hour", "multiHour"],
         "languages":[],
         "events": [],
-        "accessability": []
+        "accessibility": []
       }
     },
     { "name": "Garching Professors Union", 
@@ -24,7 +24,7 @@
         "availability": ["multiHour", "fullDay"],
         "languages":[],
         "events": [],
-        "accessability": []
+        "accessibility": []
       }
     },
     { "name": "Ostpark Orphans Union", 

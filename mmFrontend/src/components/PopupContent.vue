@@ -13,10 +13,6 @@
 </script>
 
 <style>
-.popupContent {
-    width: 150px;
-}
-
 .popupContent h2, p, button{
     margin-top: 0.5em !important;
     margin-bottom: 0px !important;
