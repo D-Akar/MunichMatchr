@@ -5,29 +5,18 @@ import com.mm.munichmatcher.Entities.Interest;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.List;
-
-@Entity
+@Document("User")
 public class User {
 
     @Id
-    private int id;
+    private String id;
     private String name;
-//    private String Nachname;
-//    private String email;
-//    private String password;
-//    private String phone;
-//    private String address;
-//    private String role;
-//    private int age;
-//    private Geschlecht geschlecht;
-
-    //@OneToMany
-    //private List<Interest> interest;
 
 
-    public User(int id, String name) {
+    public User(String id, String name) {
         this.id = id;
         this.name = name;
     }
@@ -36,11 +25,11 @@ public class User {
 
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
