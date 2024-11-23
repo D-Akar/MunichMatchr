@@ -16,14 +16,15 @@ public class Organisation {
     private long longitude;
     private long latitude;
 
-    public Organisation(long longitude, String address, String website, String phoneNumber, String description, String contactPerson, String email, String id) {
-        this.longitude = longitude;
+    public Organisation(String address, String website, String phoneNumber, String description, String contactPerson, String email, String id) {
+
         this.address = address;
         this.website = website;
         this.phoneNumber = phoneNumber;
         this.description = description;
         this.contactPerson = contactPerson;
         this.email = email;
+        this.longitude = longitude;
         this.latitude = latitude;
     }
 
