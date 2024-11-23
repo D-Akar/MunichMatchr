@@ -17,13 +17,13 @@ const upcomingEvents = ref([
 // fetching (mock)
 const points = ref(120) //points
 const availableGifts = ref([
-  { id: 1, name: 'Coffee Coupon', pointsCost: 50, description: 'Get a free coffee.', redeemed: false },
-  { id: 2, name: 'Book Voucher', pointsCost: 100, description: 'Discount on books.', redeemed: false },
-  { id: 3, name: 'Gift Mug', pointsCost: 200, description: 'Receive a personalized mug.', redeemed: true },
-  { id: 4, name: 'Local Gift Card', pointsCost: 150, description: 'Gift card for local stores.', redeemed: false }
+  { id: 3, name: 'Starbucks Coupon', pointsCost: 50, description: '50 % discount for your coffee order', redeemed: false },
+  { id: 2, name: 'Book Voucher', pointsCost: 100, description: '20% discount at Hugendubel ', redeemed: false },
+  { id: 1, name: 'Social Work', pointsCost: points, description: 'Redeem all your point as a social work credit.', redeemed: false },
+  { id: 4, name: 'Käfer Gift Card', pointsCost: 150, description: '10% off of luxurious goods', redeemed: true }
 ])
 
-//mack past events
+//mock past events
 const pastEvents = ref([
   { id: 1, name: 'Story Telling', date: '2024-10-15', location: 'Library' },
   { id: 2, name: 'Game Night', date: '2024-11-01', location: 'Recreation Center' }
@@ -31,7 +31,7 @@ const pastEvents = ref([
 // cat
 const mobileFiltersOpen = ref(false)
 
-// Mockup function to simulate redeeming a gift
+// mock CHANGE!!!!!
 const redeemGift = (giftId) => {
   const gift = availableGifts.value.find(g => g.id === giftId)
   if (gift && points.value >= gift.pointsCost && !gift.redeemed) {
@@ -43,12 +43,10 @@ const redeemGift = (giftId) => {
 
 <template>
   <main class="flex h-full flex-col">
-    <!-- Using the HeaderBlock component for consistent styling -->
     <HeaderBlock />
 
     <div class="bg-white">
       <div>
-        <!-- Mobile filter dialog -->
         <TransitionRoot as="template" :show="mobileFiltersOpen">
           <Dialog class="relative z-40 lg:hidden" @close="mobileFiltersOpen = false">
             <TransitionChild as="template" enter="transition-opacity ease-linear duration-300" enter-from="opacity-0"
@@ -78,7 +76,6 @@ const redeemGift = (giftId) => {
           </Dialog>
         </TransitionRoot>
 
-        <!-- Main content -->
         <main class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div class="flex items-baseline justify-between border-b border-gray-200 pb-6 pt-24">
             <h1 class="text-4xl font-bold tracking-tight text-gray-900">Your Benefits</h1>
@@ -89,10 +86,9 @@ const redeemGift = (giftId) => {
             <h2 id="gifts-heading" class="sr-only">Gifts</h2>
 
 
-            <!-- Displaying available and redeemed gifts -->
+            <!-- available gifts and redeemed gifts -->
             <div class="grid grid-cols-1 gap-x-8 gap-y-10 lg:grid-cols-3">
               <div class="lg:col-span-3 space-y-6">
-                <!-- Available Gifts -->
                 <div>
                   <h2 class="text-2xl font-bold text-gray-900 mb-4">Available Gifts</h2>
                   <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -108,8 +104,6 @@ const redeemGift = (giftId) => {
                     </div>
                   </div>
                 </div>
-
-                <!-- Redeemed Gifts -->
                 <div>
                   <h2 class="text-2xl font-bold text-gray-900 mt-8 mb-4">Redeemed Gifts</h2>
                   <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -124,11 +118,11 @@ const redeemGift = (giftId) => {
               </div>
             </div>
           </section>
-          <!-- Events Section -->
+          <!-- evsec -->
           <section aria-labelledby="events-heading" class="pb-24 pt-6 border-t border-gray-200">
             <h2 id="events-heading" class="text-2xl font-bold text-gray-900 mb-4">Your Events</h2>
 
-            <!-- Upcoming Events -->
+            <!-- upcoming -->
             <div class="border-b border-gray-200 py-4">
               <Disclosure>
                 <template #default="{ open }">
@@ -152,7 +146,7 @@ const redeemGift = (giftId) => {
               </Disclosure>
             </div>
 
-            <!-- Past Events -->
+            <!-- past events -->
             <div class="border-b border-gray-200 py-4 mt-4">
               <Disclosure>
                 <template #default="{ open }">
