@@ -28,5 +28,9 @@ public class UserController {
         return userService.addUser(user);
     }
 
+    @DeleteMapping("/delete/{email}")
+    public void deleteUser(@PathVariable String email) {
+        userService.deleteUser(email);
+    }
 
 }

@@ -22,4 +22,8 @@ public class UserService {
     public User addUser(User user) {
         return userRepository.save(user);
     }
+
+    public void deleteUser(String email) {
+        userRepository.deleteByEmail(email);
+    }
 }
