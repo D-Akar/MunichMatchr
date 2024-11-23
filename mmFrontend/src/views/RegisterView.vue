@@ -12,7 +12,7 @@
     </div>
 
     <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-      <form class="space-y-6" action="#" method="POST">
+      <form class="space-y-2" action="#" method="POST">
         <div class="flex flex-row space-x-4 w-full justify-between">
           <div class="flex-1">
             <label for="firstName" class="block text-sm/6 font-medium text-gray-900"
@@ -62,11 +62,6 @@
             <label for="password" class="block text-sm/6 font-medium text-gray-900"
               >Password</label
             >
-            <div class="text-sm">
-              <a href="#" class="font-semibold text-indigo-600 hover:text-indigo-500"
-                >Forgot password?</a
-              >
-            </div>
           </div>
           <div class="mt-2">
             <input
@@ -80,7 +75,7 @@
           </div>
         </div>
 
-        <div>
+        <div class="pt-2">
           <button
             type="submit"
             class="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm/6 font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
@@ -98,10 +93,10 @@
         >
       </p>
     </div>
-    <div
+    <!-- <div
       class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-100"
     >
-      <div class="bg-white shadow sm:rounded-lg w-1/2 h-2/3">
+      <div class="bg-white shadow sm:rounded-lg w-3/5 h-2/3">
         <div class="px-4 py-5 sm:p-6 h-full flex flex-col">
           <h3 class="text-base font-semibold text-gray-900">
             Tell us more about yourself!
@@ -111,8 +106,16 @@
           </p>
           <div class="h-max flex-col justify-between flex">
             <div class="mt-6 text-sm text-gray-500 flex flex-row space-x-4 w-full">
-              <div class="flex-1">
-                <p>Selection content</p>
+              <div class="flex-1 flex">
+                <div class="flex flex-wrap gap-4">
+                  <div 
+                    v-for="element in currentStepContent" 
+                    :key="element" 
+                    class="card flex justify-center items-center border rounded-lg border-black"
+                  >
+                    {{ element }}
+                  </div>
+                </div>
               </div>
               <div class="pr-12 py-12 sm:px-6 lg:px-8 flex-3" id="progressList">
                 <nav class="flex justify-center" aria-label="Progress">
@@ -180,9 +183,14 @@
               </div>
             </div>
             <div class="mt-5 flex justify-center space-x-4">
-                <button
+              <button
                 type="button"
-                class="inline-flex items-center rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500"
+                :disabled="currentStep === 0"
+                :class="[
+                  'inline-flex items-center rounded-md px-3 py-2 text-sm font-semibold text-white shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500',
+                  currentStep === 0 ? 'bg-gray-400' : 'bg-indigo-600 hover:bg-indigo-500'
+                ]"
+                @click="goToPreviousStep"
               >
                 Previous
               </button>
@@ -194,7 +202,12 @@
               </button>
               <button
                 type="button"
-                class="inline-flex items-center rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500"
+                :disabled="currentStep === steps.length - 1"
+                :class="[
+                  'inline-flex items-center rounded-md px-3 py-2 text-sm font-semibold text-white shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500',
+                  currentStep === steps.length - 1 ? 'bg-gray-400' : 'bg-indigo-600 hover:bg-indigo-500'
+                ]"
+                @click="goToNextStep"
               >
                 Next
               </button>
@@ -202,22 +215,85 @@
           </div>
         </div>
       </div>
-    </div>
+    </div> -->
   </div>
 </template>
 
 <script setup>
 import { CheckCircleIcon } from "@heroicons/vue/20/solid";
+import { ref, computed } from 'vue';
 
 const steps = [
-  { name: "Interests", href: "#", status: "complete" },
-  { name: "Languages", href: "#", status: "current" },
-  { name: "Event Types", href: "#", status: "upcoming" },
+  { name: "Interests", href: "#", status: "complete", step: 0 },
+  { name: "Languages", href: "#", status: "current", step: 1 },
+  { name: "Event Types", href: "#", status: "upcoming", step: 2 },
 ];
+
+// Make currentStep reactive
+const currentStep = ref(0);
+
+// Compute currentStepContent based on currentStep
+const currentStepContent = computed(() => stepElements[currentStep.value]);
+
+// Navigation functions
+const goToNextStep = () => {
+  if (currentStep.value < steps.length - 1) {
+    currentStep.value++;
+    updateStepStatuses();
+  }
+};
+
+const goToPreviousStep = () => {
+  if (currentStep.value > 0) {
+    currentStep.value--;
+    updateStepStatuses();
+  }
+};
+
+const updateStepStatuses = () => {
+  steps.forEach((step, index) => {
+    if (index < currentStep.value) {
+      step.status = 'complete';
+    } else if (index === currentStep.value) {
+      step.status = 'current';
+    } else {
+      step.status = 'upcoming';
+    }
+  });
+};
+
+const stepElements = {
+    0: [
+        "Literature",
+        "Sports",
+        "Cooking"
+    ],
+    1: [
+        "English",
+        "German",
+        "Turkish",
+        "Mandarin",
+        "Vietnamese",
+        "Arabic"
+    ],
+    2: [
+        "Elderly Care",
+        "Language Cafes",
+        "Youth Insitutions"
+    ],
+};
+
+let selectedItems = [];
 </script>
 
 <style>
 p {
   margin-top: 0px !important;
+}
+
+.card {
+    width: 150px;
+    height: 150px;
+    margin-right: 10px;
 }
 </style>
