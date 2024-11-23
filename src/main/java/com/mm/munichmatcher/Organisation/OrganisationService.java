@@ -17,7 +17,7 @@ public class OrganisationService {
     }
 
     public Organisation getOrgaByEmail(String email) {
-        return organisationRepository.findById(email).orElse(null);
+        return organisationRepository.findById(email).orElse(new Organisation());
     }
 
     public Organisation addOrga(Organisation orga) {
