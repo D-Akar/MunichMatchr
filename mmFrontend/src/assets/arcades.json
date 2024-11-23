@@ -5,13 +5,12 @@
       "description": "Spend an afternoon learning the secret recipes of the elderly",
       "details": {
         "interestFields": [
-          "Literature",
-          "Sports"
+          "cooking"
         ],
+        "availability": ["1hour", "multiHour"],
         "languages":[],
         "events": [],
-        "accessability": [],
-        "timeCommitment" : []
+        "accessability": []
       }
     },
     { "name": "Garching Professors Union", 
@@ -20,13 +19,12 @@
       "description": "Professors on the hunt for students that actually listen",
       "details": {
         "interestFields": [
-          "Literature",
-          "Sports"
+          "literature"
         ],
+        "availability": ["multiHour", "fullDay"],
         "languages":[],
         "events": [],
-        "accessability": [],
-        "timeCommitment" : []
+        "accessability": []
       }
     },
     { "name": "Ostpark Orphans Union", 
@@ -35,12 +33,11 @@
       "description": "Be a big brother/sister for a fun day of outdoor activities!",
       "details": {
         "interestFields": [
-          "Literature",
-          "Sports"
+          "sports"
         ],
+        "availability": ["flexible"],
         "languages":[],
         "events": [],
-        "accessability": [],
-        "timeCommitment" : []
+        "accessibility": []
       } }
   ]
