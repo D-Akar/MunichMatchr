@@ -20,7 +20,7 @@
               <input
                 id="firstName"
                 name="firstName"
-                required="true"
+                required
                 class="block w-full rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm/6"
               />
             </div>
@@ -31,7 +31,7 @@
               <input
                 id="lastName"
                 name="lastName"
-                required="true"
+                required
                 class="block w-full rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm/6"
               />
             </div>
@@ -45,8 +45,9 @@
               name="email"
               type="email"
               autocomplete="email"
-              required="true"
-              class="block w-full rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm"            />
+              required
+              class="block w-full rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm"
+            />
           </div>
         </div>
 
@@ -60,8 +61,9 @@
               name="password"
               type="password"
               autocomplete="current-password"
-              required="true"
-              class="block w-full rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm"            />
+              required
+              class="block w-full rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm"
+            />
           </div>
         </div>
 
@@ -96,7 +98,10 @@
 
 <script setup>
 import { ref, computed } from 'vue';
+import { useRouter } from 'vue-router';
 import PopupComponent from './Popup.vue';
+
+const router = useRouter(); 
 
 const isPopupVisible = ref(false);
 
@@ -115,6 +120,7 @@ const showPopup = () => {
 
 const closePopup = () => {
   isPopupVisible.value = false;
+  router.push({ name: 'Dashboard' });
 };
 
 const updateStepStatuses = () => {
@@ -131,6 +137,11 @@ const updateStepStatuses = () => {
 
 const handleSubmit = () => {
   console.log('Form submitted with selected items:', selectedItems.value);
+  try {
+    router.push({ name: 'Dashboard' });
+  } catch (error) {
+    console.error('Navigation error:', error);
+  }
 };
 </script>
 

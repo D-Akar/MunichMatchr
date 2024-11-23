@@ -9,7 +9,7 @@
         <div class="w-full max-w-4xl bg-white p-6 rounded-lg shadow-lg">
           <div class="mb-6">
             <p class="text-lg font-semibold">
-              Events Attended: <span class="text-indigo-600">{{ attendedEvents }}</span>
+              Events Attended: 4<span class="text-indigo-600">{{ attendedEvents }}</span>
             </p>
           </div>
           <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -55,12 +55,26 @@
         </div>
       </div>
     </Section>
+    <PopupComponent
+      v-if="isPopupVisible"
+      :isVisible="isPopupVisible"
+      :steps="steps"
+      :currentStep="currentStep"
+      :selectedItems="selectedItems"
+      @close="closePopup"
+      @submit="handleSubmit"
+      @update:currentStep="currentStep = $event"
+    />
   </main>
 </template>
 
 <script setup>
 import HeaderBlock from "@/components/HeaderBlock.vue";
+import PopupComponent from './Popup.vue';
 import { ref } from "vue";
+import { useRouter } from 'vue-router';
+
+const router = useRouter();
 
 // example data would be pulled from somewhere
 const profileData = ref({
@@ -71,8 +85,22 @@ const profileData = ref({
   phone: "+49155462014",
 });
 
+const isPopupVisible = ref(false);
+const currentStep = ref(0);
+const steps = [
+  { name: "Interests", href: "#", status: "complete", step: 0 },
+  { name: "Languages", href: "#", status: "current", step: 1 },
+  { name: "Event Types", href: "#", status: "upcoming", step: 2 },
+];
+const selectedItems = ref([]);
+
+const showPopup = () => {
+  isPopupVisible.value = true;
+};
+
 //for backend
 const handleSave = () => {
+  router.push({ name: 'Dashboard' });
   const updatedProfileData = {
     firstName: profileData.value.firstName,
     lastName: profileData.value.lastName,
@@ -82,7 +110,20 @@ const handleSave = () => {
   };
 };
 
+const closePopup = () => {
+  isPopupVisible.value = false;
+  router.push({ name: 'Profile' });
+};
+
+const handleSubmit = () => {
+  console.log('Interests submitted with selected items:', selectedItems.value);
+  closePopup();
+  router.push({ name: 'Profile' });
+};
+
+
+
 const handleInterests = () => {
-  //?????????
+  showPopup();
 };
 </script>
