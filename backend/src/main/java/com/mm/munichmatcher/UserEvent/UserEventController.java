@@ -99,6 +99,8 @@ public class UserEventController {
             }
             user.setEventCounter(user.getEventCounter() + 1);
             user.setCoins(user.getCoins() + 20);
+            userService.deleteUser(user.getEmail());
+            userService.addUser(user);
         }
         eventService.addEvent(event); //save
     }
