@@ -4,53 +4,66 @@
     <Section>
       <div class="flex h-full w-full items-center justify-center flex-col">
         <h1 class="text-3xl font-bold mb-6">Profile</h1>
-        <p class="text-gray-500 mb-8">Edit your information</p>
+        <p class="text-gray-500 mb-8">Manage your personal information below.</p>
+
         <div class="w-full max-w-4xl bg-white p-6 rounded-lg shadow-lg">
+          <div class="mb-6">
+            <p class="text-lg font-semibold">
+              Events Attended: <span class="text-indigo-600">{{ attendedEvents }}</span>
+            </p>
+          </div>
           <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
               <label for="firstName" class="block text-sm font-medium text-gray-700">First Name</label>
-              <input
-                v-model="profileData.firstName"
-                type="text"
-                id="firstName"
-                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
-              />
+              <input v-model="profileData.firstName" type="text" id="firstName"
+                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" />
             </div>
             <div>
               <label for="lastName" class="block text-sm font-medium text-gray-700">Last Name</label>
-              <input
-                v-model="profileData.lastName"
-                type="text"
-                id="lastName"
-                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
-              />
+              <input v-model="profileData.lastName" type="text" id="lastName"
+                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" />
             </div>
             <div>
               <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
-              <input
-                v-model="profileData.email"
-                type="email"
-                id="email"
-                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
-              />
+              <input v-model="profileData.email" type="email" id="email"
+                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" />
             </div>
             <div>
               <label for="address" class="block text-sm font-medium text-gray-700">Address</label>
-              <input
-                v-model="profileData.address"
-                type="text"
-                id="address"
-                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
-              />
+              <input v-model="profileData.address" type="text" id="address"
+                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" />
             </div>
             <div>
               <label for="phone" class="block text-sm font-medium text-gray-700">Phone</label>
-              <input
-                v-model="profileData.phone"
-                type="tel"
-                id="phone"
-                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
-              />
+              <input v-model="profileData.phone" type="tel" id="phone"
+                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" />
+            </div>
+          </div>
+          
+          <div class="mb-6">
+            <label class="block text-sm font-medium text-gray-700 mb-2">Languages you know or want to learn</label>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+              <div>
+                <label class="inline-flex items-center">
+                  <input type="checkbox" value="German" v-model="profileData.languages"
+                    class="form-checkbox text-indigo-600" />
+                  <span class="ml-2">German</span>
+                </label>
+              </div>
+              <div>
+                <label class="inline-flex items-center">
+                  <input type="checkbox" value="English" v-model="profileData.languages"
+                    class="form-checkbox text-indigo-600" />
+                  <span class="ml-2">English</span>
+                </label>
+              </div>
+              <div>
+                <label class="inline-flex items-center">
+                  <input type="checkbox" value="Turkish" v-model="profileData.languages"
+                    class="form-checkbox text-indigo-600" />
+                  <span class="ml-2">Turkish</span>
+                </label>
+              </div>
             </div>
           </div>
 
@@ -58,14 +71,11 @@
           <div class="flex justify-between items-center mt-8">
             <button
               class="bg-gray-200 text-gray font-bold py-2 px-6 rounded text-sm hover:bg-gray-300 focus:outline-none"
-              @click="handleInterests"
-            >
+              @click="handleInterests">
               Change Interests
             </button>
-            <button
-              class="bg-[#4338CA] text-white font-bold py-2 px-6 rounded hover:bg-[#4438AA] focus:outline-none"
-              @click="handleSave"
-            >
+            <button class="bg-[#4338CA] text-white font-bold py-2 px-6 rounded hover:bg-[#4438AA] focus:outline-none"
+              @click="handleSave">
               Save Changes
             </button>
           </div>
@@ -96,6 +106,7 @@ const handleSave = () => {
     email: profileData.value.email,
     address: profileData.value.address,
     phone: profileData.value.phone,
+    languages: ["English", "German"],
   };
 };
 
