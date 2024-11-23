@@ -8,18 +8,18 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
-@RestController
+@RestController("/user")
 public class UserController {
 
     @Autowired
     private UserService userService;
 
-    @GetMapping("/user")
-    public List<User> getUser() {
-        return userService.getAllUsers();
+    @GetMapping("/get")
+    public String getUser() {
+        return "users";
     }
 
-    @PostMapping("/user")
+    @PostMapping("/post")
     public void createUser(@RequestBody User user) {
         userService.createUser(user);
     }
