@@ -39,33 +39,6 @@
                 class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" />
             </div>
           </div>
-          
-          <div class="mb-6">
-            <label class="block text-sm font-medium text-gray-700 mb-2">Languages you know or want to learn</label>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-              <div>
-                <label class="inline-flex items-center">
-                  <input type="checkbox" value="German" v-model="profileData.languages"
-                    class="form-checkbox text-indigo-600" />
-                  <span class="ml-2">German</span>
-                </label>
-              </div>
-              <div>
-                <label class="inline-flex items-center">
-                  <input type="checkbox" value="English" v-model="profileData.languages"
-                    class="form-checkbox text-indigo-600" />
-                  <span class="ml-2">English</span>
-                </label>
-              </div>
-              <div>
-                <label class="inline-flex items-center">
-                  <input type="checkbox" value="Turkish" v-model="profileData.languages"
-                    class="form-checkbox text-indigo-600" />
-                  <span class="ml-2">Turkish</span>
-                </label>
-              </div>
-            </div>
-          </div>
 
           <!-- two buttons -->
           <div class="flex justify-between items-center mt-8">
@@ -106,7 +79,6 @@ const handleSave = () => {
     email: profileData.value.email,
     address: profileData.value.address,
     phone: profileData.value.phone,
-    languages: ["English", "German"],
   };
 };
 
