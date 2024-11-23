@@ -1,10 +1,13 @@
 package com.mm.munichmatcher.User;
 
+import com.opencagedata.jopencage.JOpenCageGeocoder;
+import com.opencagedata.jopencage.model.JOpenCageForwardRequest;
+import com.opencagedata.jopencage.model.JOpenCageLatLng;
+import com.opencagedata.jopencage.model.JOpenCageResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/user")
@@ -19,7 +22,7 @@ public class UserController {
     }
 
     @GetMapping("/get/{email}")
-    public User getUserById(@PathVariable String email) {
+    public User getUserById(@PathVariable String email, String address) {
         return userService.getUserByEmail(email);
     }
 

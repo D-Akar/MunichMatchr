@@ -16,44 +16,42 @@ import java.util.List;
 public class Event {
 
     @Id
+    private String id;
     private String name;
-    private String organisation;
+    private long lat;
+    private long lon;
+    private String description;
+
     private List<String> interests;
     private String language;
+    private List<String> availability;
+    private List<String> accessibility;
+
     //@JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss'Z'", timezone = "UTC")
     private String StartDate;
     //@JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss'Z'", timezone = "UTC")
     private String EndDate;
-    private int capacity;
-    @DBRef
-    private List<User> applicants;
+
     @DBRef
     private List<User> approvedApplicants;
     @DBRef
-    private List<User> rejectedApplicants;
-    @DBRef
-    private List<User> applicantsParticipated;
-    @DBRef
-    private List<User> applicantsNotParticipated;
-
-    private String organisatorEmail;
+    private List<User> pendingApplicants;
 
     public Event() {}
 
-    public Event(String name, String organisation, List<String> interests, String language, String startDate, String endDate, int capacity, List<User> applicants, List<User> approvedApplicants, List<User> rejectedApplicants, List<User> applicantsParticipated, List<User> applicantsNotParticipated, String organisator) {
+    public Event(String name, long lat, long lon, String description, List<String> interests, String language, List<String> availability, List<String> accessibility, String startDate, String endDate, List<User> approvedApplicants, List<User> pendingApplicants) {
         this.name = name;
-        this.organisation = organisation;
+        this.lat = lat;
+        this.lon = lon;
+        this.description = description;
         this.interests = interests;
         this.language = language;
+        this.availability = availability;
+        this.accessibility = accessibility;
         StartDate = startDate;
         EndDate = endDate;
-        this.capacity = capacity;
-        this.applicants = applicants;
         this.approvedApplicants = approvedApplicants;
-        this.rejectedApplicants = rejectedApplicants;
-        this.applicantsParticipated = applicantsParticipated;
-        this.applicantsNotParticipated = applicantsNotParticipated;
-        this.organisatorEmail = organisator;
+        this.pendingApplicants = pendingApplicants;
     }
 
     public String getName() {
@@ -64,12 +62,28 @@ public class Event {
         this.name = name;
     }
 
-    public String getOrganisation() {
-        return organisation;
+    public long getLat() {
+        return lat;
     }
 
-    public void setOrganisation(String organisation) {
-        this.organisation = organisation;
+    public void setLat(long lat) {
+        this.lat = lat;
+    }
+
+    public long getLon() {
+        return lon;
+    }
+
+    public void setLon(long lon) {
+        this.lon = lon;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public List<String> getInterests() {
@@ -88,6 +102,22 @@ public class Event {
         this.language = language;
     }
 
+    public List<String> getAvailability() {
+        return availability;
+    }
+
+    public void setAvailability(List<String> availability) {
+        this.availability = availability;
+    }
+
+    public List<String> getAccessibility() {
+        return accessibility;
+    }
+
+    public void setAccessibility(List<String> accessibility) {
+        this.accessibility = accessibility;
+    }
+
     public String getStartDate() {
         return StartDate;
     }
@@ -104,22 +134,6 @@ public class Event {
         EndDate = endDate;
     }
 
-    public int getCapacity() {
-        return capacity;
-    }
-
-    public void setCapacity(int capacity) {
-        this.capacity = capacity;
-    }
-
-    public List<User> getApplicants() {
-        return applicants;
-    }
-
-    public void setApplicants(List<User> applicants) {
-        this.applicants = applicants;
-    }
-
     public List<User> getApprovedApplicants() {
         return approvedApplicants;
     }
@@ -128,35 +142,11 @@ public class Event {
         this.approvedApplicants = approvedApplicants;
     }
 
-    public List<User> getRejectedApplicants() {
-        return rejectedApplicants;
+    public List<User> getPendingApplicants() {
+        return pendingApplicants;
     }
 
-    public void setRejectedApplicants(List<User> rejectedApplicants) {
-        this.rejectedApplicants = rejectedApplicants;
-    }
-
-    public List<User> getApplicantsParticipated() {
-        return applicantsParticipated;
-    }
-
-    public void setApplicantsParticipated(List<User> applicantsParticipated) {
-        this.applicantsParticipated = applicantsParticipated;
-    }
-
-    public List<User> getApplicantsNotParticipated() {
-        return applicantsNotParticipated;
-    }
-
-    public void setApplicantsNotParticipated(List<User> applicantsNotParticipated) {
-        this.applicantsNotParticipated = applicantsNotParticipated;
-    }
-
-    public String getOrganisator() {
-        return organisatorEmail;
-    }
-
-    public void setOrganisator(String organisator) {
-        this.organisatorEmail = organisator;
+    public void setPendingApplicants(List<User> pendingApplicants) {
+        this.pendingApplicants = pendingApplicants;
     }
 }
