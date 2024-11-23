@@ -331,8 +331,9 @@ const mobileFiltersOpen = ref(false);
                       :key="index"
                       :lat-lng="[arcade.lat, arcade.lng]"
                     >
-                      <!-- <l-popup>{{ arcade.name }}</l-popup> -->
-                      <l-popup :title = arcade.name :details = arcade.description></l-popup>
+                      <l-popup>
+                        <PopupContent :title="arcade.name" :description="arcade.description" />
+                      </l-popup>
                     </l-marker>
                   </l-map>
                 </div>
@@ -349,5 +350,9 @@ const mobileFiltersOpen = ref(false);
 #map {
   height: 500px;
   width: 100%;
+}
+
+.leaflet-popup-content-wrapper {
+  width: 200px;
 }
 </style>

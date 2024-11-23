@@ -1,15 +1,28 @@
 <template>
-    <div>
-        <h2>{{ title }}</h2>
-        <div>
-            <p>Tags</p>
-            <p>Short blurb</p>
-            <p>Contact Info</p>
-            <button>Query button</button>
+    <div class="popupContent flex flex-col">
+        <h2 class="text-lg font-bold">{{ title }}</h2>
+        <div class="mt-0">  
+            <p class="text-gray-600">{{ description }}</p>
+            <button class="text-white bg-blue-700 rounded-lg px-4 py-2 hover:text-blue-700 hover:bg-blue-200 transition-all ease-in-out">Reach Out!</button>
         </div>
     </div>
 </template>
 
 <script setup>
-    defineProps(['title', 'details'])
+    defineProps(['title', 'description', 'details'])
 </script>
+
+<style>
+.popupContent {
+    width: 150px;
+}
+
+.popupContent h2, p, button{
+    margin-top: 0.5em !important;
+    margin-bottom: 0px !important;
+    margin-block-start: 0px;
+    margin-block-end: 0px;
+}
+
+
+</style>

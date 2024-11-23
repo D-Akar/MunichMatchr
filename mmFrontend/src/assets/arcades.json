@@ -1,8 +1,8 @@
 [
-    { "name": "Arcade 1", 
+    { "name": "Munich Centre Baking", 
       "lat": 48.1351, 
       "lng": 11.5820,
-      "description": "Organization thats really nice :)",
+      "description": "Spend an afternoon learning the secret recipes of the elderly",
       "details": {
         "interestFields": [
           "Literature",
@@ -14,10 +14,10 @@
         "timeCommitment" : []
       }
     },
-    { "name": "Arcade 2", 
-      "lat": 51.515, 
-      "lng": -0.1,
-      "description": "Organization thats really nice :)",
+    { "name": "Garching Professors Union", 
+      "lat": 48.249628, 
+      "lng": 11.652496, 
+      "description": "Professors on the hunt for students that actually listen",
       "details": {
         "interestFields": [
           "Literature",
@@ -29,10 +29,10 @@
         "timeCommitment" : []
       }
     },
-    { "name": "Arcade 3", 
-      "lat": 51.525, 
-      "lng": -0.08,
-      "description": "Organization thats really nice :)",
+    { "name": "Ostpark Orphans Union", 
+      "lat": 48.113218, 
+      "lng": 11.639745,
+      "description": "Be a big brother/sister for a fun day of outdoor activities!",
       "details": {
         "interestFields": [
           "Literature",
