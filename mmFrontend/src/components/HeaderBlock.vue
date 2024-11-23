@@ -14,7 +14,8 @@
           </button>
         </div>
         <div class="hidden lg:flex lg:flex-1 lg:justify-end lg:gap-x-12">
-            <a v-for="item in navigation" :key="item.name" :href="item.href" class="text-sm/6 font-semibold text-gray-900 items-center flex hover:text-blue-700 transition-all ease-in-out">{{ item.name }}</a>
+            <a v-for="item in navigation" :key="item.name" :href="item.href" class="text-sm/6 font-semibold text-gray-900 items-center flex hover:text-blue-700 transition-all ease-in-out">
+            {{ item.name }}</a>
           <a href="#" class="text-sm/6 font-semibold text-white bg-blue-700 px-4 py-2 rounded-lg hover:text-blue-700 hover:bg-blue-200 transition-all ease-in-out">Logout </a>
         </div>
       </nav>
@@ -53,9 +54,9 @@
   import { Bars3Icon, XMarkIcon } from '@heroicons/vue/24/outline'
   
   const navigation = [
-    { name: 'Dashboard', href: '#' },
-    { name: 'Benefits', href: '#' },
-    { name: 'Profile', href: '#' },
+    { name: 'Dashboard', href: '/' },
+    { name: 'Benefits', href: '/benefits' },
+    { name: 'Profile', href: '/profile' },
   ]
   
   const mobileMenuOpen = ref(false)
