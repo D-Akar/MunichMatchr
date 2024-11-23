@@ -15,28 +15,28 @@
           <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
               <label for="firstName" class="block text-sm font-medium text-gray-700">First Name</label>
-              <input v-model="profileData.firstName" type="text" id="firstName"
-                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" />
+              <input v-model="profileData.firstName" type="text" id="firstName" 
+                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 px-2" />
             </div>
             <div>
               <label for="lastName" class="block text-sm font-medium text-gray-700">Last Name</label>
               <input v-model="profileData.lastName" type="text" id="lastName"
-                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" />
+                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 px-2" />
             </div>
             <div>
               <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
               <input v-model="profileData.email" type="email" id="email"
-                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" />
+                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 px-2" />
             </div>
             <div>
               <label for="address" class="block text-sm font-medium text-gray-700">Address</label>
               <input v-model="profileData.address" type="text" id="address"
-                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" />
+                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 px-2" />
             </div>
             <div>
               <label for="phone" class="block text-sm font-medium text-gray-700">Phone</label>
               <input v-model="profileData.phone" type="tel" id="phone"
-                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" />
+                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 px-2" />
             </div>
           </div>
 
