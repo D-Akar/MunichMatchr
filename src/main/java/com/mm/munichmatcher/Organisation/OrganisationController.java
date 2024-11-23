@@ -1,10 +1,11 @@
 package com.mm.munichmatcher.Organisation;
 
+import com.mm.munichmatcher.User.User;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.stereotype.Controller;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/organisation")
@@ -13,23 +14,23 @@ public class OrganisationController {
     @Autowired
     private OrganisationService organisationService;
 
-    @GetMapping("/details")
-    public ResponseEntity<String> returnOrga() {
-        return ResponseEntity.status(HttpStatus.CREATED).body("Orga");
+    @GetMapping("/get")
+    public List<Organisation> getAllOrgas(){
+        return organisationService.getAllOrgas();
     }
 
-    @PostMapping
-    public ResponseEntity<String> createOrga(){
-        return ResponseEntity.status(HttpStatus.OK).body("Product created");
+    @GetMapping("/get/{email}")
+    public User getOrgaById(@PathVariable String email) {
+        return organisationService.getOrgaById(email);
     }
 
-    @PutMapping
-    public ResponseEntity<String> updateOrga(){
-        return ResponseEntity.status(HttpStatus.OK).body("Product Updated");
+    @PostMapping("/add")
+    public Organisation addOrga(@RequestBody Organisation orga) {
+        return organisationService.addOrga(orga);
     }
 
-    @DeleteMapping
-    public ResponseEntity<String> deleteOrga(){
-        return ResponseEntity.status(HttpStatus.NO_CONTENT).body("Product deleted");
+    @DeleteMapping("/delete/{email}")
+    public void deleteOrga(@PathVariable String email) {
+        organisationService.deleteUser(email);
     }
 }
