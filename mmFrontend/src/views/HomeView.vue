@@ -239,7 +239,7 @@
                     <l-marker
                       v-for="(arcade, index) in filteredArcades"
                       :key="index"
-                      :lat-lng="[arcade.lat, arcade.lng]"
+                      :lat-lng="[arcade.lat, arcade.lon]"
                     >
                       <l-popup>
                         <PopupContent
@@ -288,7 +288,6 @@ import {
 import { ref, reactive, watch, onMounted } from "vue";
 import "leaflet/dist/leaflet.css";
 import { LMap, LTileLayer, LMarker, LPopup } from "@vue-leaflet/vue-leaflet";
-import arcades from "@/assets/arcades.json";
 
 const selectedFilters = reactive({
   categories: [],
@@ -297,13 +296,30 @@ const selectedFilters = reactive({
   languages: [],
   accessibility: [],
 });
-const filteredArcades = ref(arcades);
+const filteredArcades = ref([]);
 
 let zoom = ref(11);
 let center = ref([48.1351, 11.582]);
 
+const arcades = ref([]);
+
+const fetchArcades = async () => {
+  try {
+    const response = await fetch('http://localhost:8080/userEvent/getFiltered/user9@example.com');
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
+    }
+    arcades.value = await response.json();
+    filterArcades();
+  } catch (error) {
+    console.error('Error fetching arcades:', error);
+    arcades.value = [];
+  }
+};
+console.log(filteredArcades);
+
 const filterArcades = () => {
-  filteredArcades.value = arcades.filter((arcade) => {
+  filteredArcades.value = arcades.value.filter((arcade) => {
     // If all filters are empty, include all arcades
     const noFiltersApplied = Object.values(selectedFilters).every(
       (filter) => filter.length === 0
@@ -427,6 +443,7 @@ const closePreferencesPopup = () => {
 onMounted(() => {
   resetFilters();
   checkPreferences();
+  fetchArcades();
 });
 
 // Add this to debug filter changes
