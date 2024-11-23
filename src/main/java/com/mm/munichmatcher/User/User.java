@@ -10,58 +10,70 @@ import java.util.List;
 @Document(collection = "User")
 public class User {
 
-    @Id
-    private int id;
-    private String email;
-    private String name;
+    //id = email
+    private String id;
+    private String firstName;
+    private String lastName;
 
-    private int age;
-    private String languague;
+    private int eventCounter;
+
+    private List<String> languagues;
     private List<String> interests;
+    private List<String> preferredTypesOfEvents;
 
     private int coins;
 
     public User() {}
 
-    public User(String email, String name, int age, String languague, List<String> interests) {
-        this.email = email;
-        this.name = name;
-        this.age = age;
-        this.languague = languague;
+    public User(String id, String firstName, String lastName, int eventCounter, List<String> languagues, List<String> interests, List<String> preferredTypesOfEvents, int coins) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.eventCounter = eventCounter;
+        this.languagues = languagues;
         this.interests = interests;
-        this.coins = 0;
+        this.preferredTypesOfEvents = preferredTypesOfEvents;
+        this.coins = coins;
     }
 
-    public String getEmail() {
-        return email;
+    public String getId() {
+        return id;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setId(String id) {
+        this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
-    public int getAge() {
-        return age;
+    public String getLastName() {
+        return lastName;
     }
 
-    public void setAge(int age) {
-        this.age = age;
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
-    public String getLanguague() {
-        return languague;
+    public int getEventCounter() {
+        return eventCounter;
     }
 
-    public void setLanguague(String languague) {
-        this.languague = languague;
+    public void setEventCounter(int eventCounter) {
+        this.eventCounter = eventCounter;
+    }
+
+    public List<String> getLanguagues() {
+        return languagues;
+    }
+
+    public void setLanguagues(List<String> languagues) {
+        this.languagues = languagues;
     }
 
     public List<String> getInterests() {
@@ -70,6 +82,14 @@ public class User {
 
     public void setInterests(List<String> interests) {
         this.interests = interests;
+    }
+
+    public List<String> getPreferredTypesOfEvents() {
+        return preferredTypesOfEvents;
+    }
+
+    public void setPreferredTypesOfEvents(List<String> preferredTypesOfEvents) {
+        this.preferredTypesOfEvents = preferredTypesOfEvents;
     }
 
     public int getCoins() {

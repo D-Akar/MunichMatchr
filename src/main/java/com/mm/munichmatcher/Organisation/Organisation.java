@@ -19,6 +19,7 @@ public class Organisation {
     //private String address;
     private long longitude;
     private long latitude;
+    private List<String> events;
 
     public Organisation() {}
 

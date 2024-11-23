@@ -21,10 +21,10 @@ public class OrgaEventController {
     @Autowired
     private EventService eventService;
 
-    @GetMapping("/getEventsForOrga/{email}")
+    /*@GetMapping("/getEventsForOrga/{email}")
     public List<Event> getEventsforOrga(@PathVariable String email) {
         Organisation orga = organisationService.getOrgaByEmail(email);
         return eventService.getAllEvents().stream().filter(event -> event.getOrganisation().equals(orga.getEmail())).toList();
-    }
+    }*/
 
 }

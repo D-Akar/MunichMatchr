@@ -24,7 +24,7 @@ public class UserEventController {
         return eventService.getFilteredEvents(user);
     }
 
-    @PutMapping("/anmeldung/{email}/{eventName}")
+    /*@PutMapping("/anmeldung/{email}/{eventName}")
     public void anmelden(@PathVariable String email, @PathVariable String eventName) {
         User user = userService.getUserByEmail(email);
         if (user == null) {
@@ -42,5 +42,5 @@ public class UserEventController {
             event.setApplicants(List.of(user));
         }
         eventService.addEvent(event); //save
-    }
+    }*/
 }

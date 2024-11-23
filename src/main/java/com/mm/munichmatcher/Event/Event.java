@@ -23,7 +23,7 @@ public class Event {
     private String description;
 
     private List<String> interests;
-    private String language;
+    private List<String> languages;
     private List<String> availability;
     private List<String> accessibility;
 
@@ -39,19 +39,28 @@ public class Event {
 
     public Event() {}
 
-    public Event(String name, long lat, long lon, String description, List<String> interests, String language, List<String> availability, List<String> accessibility, String startDate, String endDate, List<User> approvedApplicants, List<User> pendingApplicants) {
+    public Event(String id, String name, long lat, long lon, String description, List<String> interests, List<String> languages, List<String> availability, List<String> accessibility, String startDate, String endDate, List<User> approvedApplicants, List<User> pendingApplicants) {
+        this.id = id;
         this.name = name;
         this.lat = lat;
         this.lon = lon;
         this.description = description;
         this.interests = interests;
-        this.language = language;
+        this.languages = languages;
         this.availability = availability;
         this.accessibility = accessibility;
         StartDate = startDate;
         EndDate = endDate;
         this.approvedApplicants = approvedApplicants;
         this.pendingApplicants = pendingApplicants;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -94,12 +103,12 @@ public class Event {
         this.interests = interests;
     }
 
-    public String getLanguage() {
-        return language;
+    public List<String> getLanguages() {
+        return languages;
     }
 
-    public void setLanguage(String language) {
-        this.language = language;
+    public void setLanguages(List<String> languages) {
+        this.languages = languages;
     }
 
     public List<String> getAvailability() {
