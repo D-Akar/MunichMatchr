@@ -1,6 +1,11 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 
+// Add this before creating the router
+const isAuthenticated = () => {
+  return localStorage.getItem('isAuthenticated') === 'true'
+}
+
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -35,6 +40,18 @@ const router = createRouter({
       component: () => import('../views/AdminView.vue'),
     },
   ],
+})
+
+// Add navigation guard
+router.beforeEach((to, from, next) => {
+  // List of public pages that don't require authentication
+  const publicPages = ['/login', '/register']
+  const authRequired = !publicPages.includes(to.path)
+
+  if (authRequired && !isAuthenticated()) {
+    return next('/login')
+  }
+  next()
 })
 
 export default router

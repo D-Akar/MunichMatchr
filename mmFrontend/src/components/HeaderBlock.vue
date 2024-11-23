@@ -16,7 +16,7 @@
         <div class="hidden lg:flex lg:flex-1 lg:justify-end lg:gap-x-12">
             <a v-for="item in navigation" :key="item.name" :href="item.href" class="text-sm/6 font-semibold text-gray-900 items-center flex hover:text-blue-700 transition-all ease-in-out">
             {{ item.name }}</a>
-          <a href="#" class="text-sm/6 font-semibold text-white bg-blue-700 px-4 py-2 rounded-lg hover:text-blue-700 hover:bg-blue-200 transition-all ease-in-out">Logout </a>
+          <a @click="handleLogout" href="#" class="text-sm/6 font-semibold text-white bg-blue-700 px-4 py-2 rounded-lg hover:text-blue-700 hover:bg-blue-200 transition-all ease-in-out">Logout</a>
         </div>
       </nav>
       <!-- Mobile Menu -->
@@ -39,7 +39,7 @@
                 <a v-for="item in navigation" :key="item.name" :href="item.href" class="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-gray-900 hover:bg-gray-50">{{ item.name }}</a>
               </div>
               <div class="py-6">
-                <a href="#" class="-mx-3 block rounded-lg px-3 py-2.5 text-base/7 font-semibold text-gray-900 hover:bg-gray-50">Logout</a>
+                <a @click="handleLogout" href="#" class="-mx-3 block rounded-lg px-3 py-2.5 text-base/7 font-semibold text-gray-900 hover:bg-gray-50">Logout</a>
               </div>
             </div>
           </div>
@@ -52,7 +52,9 @@
   import { ref } from 'vue'
   import { Dialog, DialogPanel } from '@headlessui/vue'
   import { Bars3Icon, XMarkIcon } from '@heroicons/vue/24/outline'
+  import { useRouter } from 'vue-router'
   
+  const router = useRouter()
   const navigation = [
     { name: 'Dashboard', href: '/' },
     { name: 'Benefits', href: '/benefits' },
@@ -60,4 +62,9 @@
   ]
   
   const mobileMenuOpen = ref(false)
+  
+  const handleLogout = () => {
+    localStorage.removeItem('isAuthenticated')
+    router.push('/login')
+  }
   </script>
