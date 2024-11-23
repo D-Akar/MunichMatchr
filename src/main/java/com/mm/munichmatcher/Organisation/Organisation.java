@@ -14,6 +14,7 @@ public class Organisation {
     private String website;
     private String address;
     private long longitude;
+    private long latitude;
 
     public Organisation(long longitude, String address, String website, String phoneNumber, String description, String contactPerson, String email, String id) {
         this.longitude = longitude;
@@ -23,6 +24,7 @@ public class Organisation {
         this.description = description;
         this.contactPerson = contactPerson;
         this.email = email;
+        this.latitude = latitude;
     }
 
     public String getEmail() {
@@ -79,5 +81,13 @@ public class Organisation {
 
     public void setLongitude(long longitude) {
         this.longitude = longitude;
+    }
+
+    public long getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(long latitude) {
+        this.latitude = latitude;
     }
 }

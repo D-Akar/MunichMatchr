@@ -20,8 +20,8 @@ public class OrganisationController {
     }
 
     @GetMapping("/get/{email}")
-    public User getOrgaById(@PathVariable String email) {
-        return organisationService.getOrgaById(email);
+    public Organisation getOrgaById(@PathVariable String email) {
+        return organisationService.getOrgaByEmail(email);
     }
 
     @PostMapping("/add")

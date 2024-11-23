@@ -14,16 +14,21 @@ public class User {
     private String email;
     private String name;
 
-    private AgeGroup ageGroup;
-
+    private int age;
+    private String languague;
     private List<String> interests;
+
+    private int coins;
 
     public User() {}
 
-    public User(String email, String name, List<String> interests) {
+    public User(String email, String name, int age, String languague, List<String> interests) {
         this.email = email;
         this.name = name;
+        this.age = age;
+        this.languague = languague;
         this.interests = interests;
+        this.coins = 0;
     }
 
     public String getEmail() {
@@ -42,11 +47,35 @@ public class User {
         this.name = name;
     }
 
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    public String getLanguague() {
+        return languague;
+    }
+
+    public void setLanguague(String languague) {
+        this.languague = languague;
+    }
+
     public List<String> getInterests() {
         return interests;
     }
 
     public void setInterests(List<String> interests) {
         this.interests = interests;
+    }
+
+    public int getCoins() {
+        return coins;
+    }
+
+    public void setCoins(int coins) {
+        this.coins = coins;
     }
 }
