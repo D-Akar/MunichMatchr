@@ -206,7 +206,13 @@
                           :value="option.value"
                           type="checkbox"
                           v-model="selectedFilters[section.id]"
-                          @change="handleFilterChange(section.id, option.value, $event.target.checked)"
+                          @change="
+                            handleFilterChange(
+                              section.id,
+                              option.value,
+                              $event.target.checked
+                            )
+                          "
                           class="size-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
                         />
                         <label
@@ -255,19 +261,72 @@
         </main>
       </div>
     </div>
-    <div v-if="showPreferencesPopup" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-100">
+    <!-- <div
+      v-if="showPreferencesPopup"
+      class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-100"
+    >
       <div class="bg-white shadow sm:rounded-lg">
         <div class="px-4 py-5 sm:p-6">
-          <h3 class="text-base font-semibold text-gray-900">Tell us more about yourself!</h3>
+          <h3 class="text-base font-semibold text-gray-900">
+            Tell us more about yourself!
+          </h3>
           <div class="mt-2 max-w-xl text-sm text-gray-500">
             <p>Please be sure to select at least one item in each category.</p>
+            <div>
+              <div class="sm:hidden">
+                <label for="tabs" class="sr-only">Select a tab</label>
+                
+                <select
+                  id="tabs"
+                  name="tabs"
+                  class="block w-full rounded-md border-gray-300 focus:border-indigo-500 focus:ring-indigo-500"
+                >
+                  <option v-for="tab in tabs" :key="tab.name" :selected="tab.current">
+                    {{ tab.name }}
+                  </option>
+                </select>
+              </div>
+              <div class="hidden sm:block">
+                <nav
+                  class="isolate flex divide-x divide-gray-200 rounded-lg shadow"
+                  aria-label="Tabs"
+                >
+                  <a
+                    v-for="(tab, tabIdx) in tabs"
+                    :key="tab.name"
+                    :href="tab.href"
+                    :class="[
+                      tab.current ? 'text-gray-900' : 'text-gray-500 hover:text-gray-700',
+                      tabIdx === 0 ? 'rounded-l-lg' : '',
+                      tabIdx === tabs.length - 1 ? 'rounded-r-lg' : '',
+                      'group relative min-w-0 flex-1 overflow-hidden bg-white px-4 py-4 text-center text-sm font-medium hover:bg-gray-50 focus:z-10',
+                    ]"
+                    :aria-current="tab.current ? 'page' : undefined"
+                  >
+                    <span>{{ tab.name }}</span>
+                    <span
+                      aria-hidden="true"
+                      :class="[
+                        tab.current ? 'bg-indigo-500' : 'bg-transparent',
+                        'absolute inset-x-0 bottom-0 h-0.5',
+                      ]"
+                    />
+                  </a>
+                </nav>
+              </div>
+            </div>
           </div>
           <div class="mt-5">
-            <button type="button" class="inline-flex items-center rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500">Submit</button>
+            <button
+              type="button"
+              class="inline-flex items-center rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500"
+            >
+              Submit
+            </button>
           </div>
         </div>
       </div>
-    </div>
+    </div> -->
   </main>
 </template>
 
@@ -306,7 +365,7 @@ const selectedFilters = reactive({
   availability: [],
   interestFields: [],
   languages: [],
-  accessibility: []
+  accessibility: [],
 });
 const filteredArcades = ref(arcades);
 
@@ -324,12 +383,14 @@ const filterArcades = () => {
     return (
       (selectedFilters.interestFields.length === 0 ||
         selectedFilters.interestFields.some((field) =>
-          (arcade.details?.interestFields || []).map(f => f.toLowerCase()).includes(field)
+          (arcade.details?.interestFields || [])
+            .map((f) => f.toLowerCase())
+            .includes(field)
         )) &&
       (selectedFilters.availability.length === 0 ||
         selectedFilters.availability.some((availability) =>
           (arcade.details?.availability || []).includes(availability)
-        )) && 
+        )) &&
       (selectedFilters.languages.length === 0 ||
         selectedFilters.languages.some((language) =>
           (arcade.details?.languages || []).includes(language)
@@ -397,10 +458,17 @@ const filters = [
   },
 ];
 
+const tabs = [
+  { name: "My Account", href: "#", current: true },
+  { name: "Company", href: "#", current: false },
+  { name: "Team Members", href: "#", current: false },
+  { name: "Billing", href: "#", current: false },
+];
+
 const mobileFiltersOpen = ref(false);
 
 const resetFilters = () => {
-  Object.keys(selectedFilters).forEach(key => {
+  Object.keys(selectedFilters).forEach((key) => {
     selectedFilters[key] = [];
   });
 };
@@ -410,7 +478,7 @@ const showPreferencesPopup = ref(false);
 
 // Function to check if preferences exist
 const checkPreferences = () => {
-  const preferences = localStorage.getItem('preferences');
+  const preferences = localStorage.getItem("preferences");
   if (!preferences) {
     showPreferencesPopup.value = true;
   }
@@ -418,7 +486,7 @@ const checkPreferences = () => {
 
 // Function to save preferences
 const savePreferences = (preferencesData) => {
-  localStorage.setItem('preferences', JSON.stringify(preferencesData));
+  localStorage.setItem("preferences", JSON.stringify(preferencesData));
   showPreferencesPopup.value = false;
 };
 
@@ -434,9 +502,13 @@ onMounted(() => {
 });
 
 // Add this to debug filter changes
-watch(selectedFilters, (newValue) => {
-  console.log('Selected filters updated:', newValue);
-}, { deep: true });
+watch(
+  selectedFilters,
+  (newValue) => {
+    console.log("Selected filters updated:", newValue);
+  },
+  { deep: true }
+);
 
 // Add this method to debug checkbox changes
 const handleFilterChange = (sectionId, value, checked) => {
