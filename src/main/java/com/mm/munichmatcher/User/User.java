@@ -10,10 +10,10 @@ import java.util.List;
 @Document(collection = "User")
 public class User {
 
-    //id = email
-    private String id;
-    private String firstName;
-    private String lastName;
+    @Id
+    private int id;
+    private String email;
+    private String name;
 
     private int eventCounter;
 
@@ -23,41 +23,45 @@ public class User {
 
     private int coins;
 
-    public User() {}
+    private String password;
 
-    public User(String id, String firstName, String lastName, int eventCounter, List<String> languagues, List<String> interests, List<String> preferredTypesOfEvents, int coins) {
+    public User() {
+    }
+
+    public User(int id, String email, String name, int eventCounter, List<String> languagues, List<String> interests, List<String> preferredTypesOfEvents, int coins, String password) {
         this.id = id;
-        this.firstName = firstName;
-        this.lastName = lastName;
+        this.email = email;
+        this.name = name;
         this.eventCounter = eventCounter;
         this.languagues = languagues;
         this.interests = interests;
         this.preferredTypesOfEvents = preferredTypesOfEvents;
         this.coins = coins;
+        this.password = password;
     }
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 
-    public String getFirstName() {
-        return firstName;
+    public String getEmail() {
+        return email;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
-    public String getLastName() {
-        return lastName;
+    public String getName() {
+        return name;
     }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public int getEventCounter() {
@@ -98,5 +102,13 @@ public class User {
 
     public void setCoins(int coins) {
         this.coins = coins;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 }
