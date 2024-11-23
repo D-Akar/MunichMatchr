@@ -22,35 +22,41 @@ public class Event {
     private long lon;
     private String description;
 
+    private String typeOfEvent;
+
     private List<String> interests;
     private List<String> languages;
     private List<String> availability;
     private List<String> accessibility;
 
     //@JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss'Z'", timezone = "UTC")
-    private String StartDate;
+    //private String StartDate;
     //@JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss'Z'", timezone = "UTC")
-    private String EndDate;
+    //private String EndDate;
+
+    private String date;
+    private int duration;
 
     @DBRef
-    private List<User> approvedApplicants;
+    private List<String> approvedApplicants;
     @DBRef
-    private List<User> pendingApplicants;
+    private List<String> pendingApplicants;
 
     public Event() {}
 
-    public Event(String id, String name, long lat, long lon, String description, List<String> interests, List<String> languages, List<String> availability, List<String> accessibility, String startDate, String endDate, List<User> approvedApplicants, List<User> pendingApplicants) {
+    public Event(String id, String name, long lat, long lon, String description, String typeOfEvent, List<String> interests, List<String> languages, List<String> availability, List<String> accessibility, String date, int duration, List<String> approvedApplicants, List<String> pendingApplicants) {
         this.id = id;
         this.name = name;
         this.lat = lat;
         this.lon = lon;
         this.description = description;
+        this.typeOfEvent = typeOfEvent;
         this.interests = interests;
         this.languages = languages;
         this.availability = availability;
         this.accessibility = accessibility;
-        StartDate = startDate;
-        EndDate = endDate;
+        this.date = date;
+        this.duration = duration;
         this.approvedApplicants = approvedApplicants;
         this.pendingApplicants = pendingApplicants;
     }
@@ -95,6 +101,14 @@ public class Event {
         this.description = description;
     }
 
+    public String getTypeOfEvent() {
+        return typeOfEvent;
+    }
+
+    public void setTypeOfEvent(String typeOfEvent) {
+        this.typeOfEvent = typeOfEvent;
+    }
+
     public List<String> getInterests() {
         return interests;
     }
@@ -127,35 +141,35 @@ public class Event {
         this.accessibility = accessibility;
     }
 
-    public String getStartDate() {
-        return StartDate;
+    public String getDate() {
+        return date;
     }
 
-    public void setStartDate(String startDate) {
-        StartDate = startDate;
+    public void setDate(String date) {
+        this.date = date;
     }
 
-    public String getEndDate() {
-        return EndDate;
+    public int getDuration() {
+        return duration;
     }
 
-    public void setEndDate(String endDate) {
-        EndDate = endDate;
+    public void setDuration(int duration) {
+        this.duration = duration;
     }
 
-    public List<User> getApprovedApplicants() {
+    public List<String> getApprovedApplicants() {
         return approvedApplicants;
     }
 
-    public void setApprovedApplicants(List<User> approvedApplicants) {
+    public void setApprovedApplicants(List<String> approvedApplicants) {
         this.approvedApplicants = approvedApplicants;
     }
 
-    public List<User> getPendingApplicants() {
+    public List<String> getPendingApplicants() {
         return pendingApplicants;
     }
 
-    public void setPendingApplicants(List<User> pendingApplicants) {
+    public void setPendingApplicants(List<String> pendingApplicants) {
         this.pendingApplicants = pendingApplicants;
     }
 }

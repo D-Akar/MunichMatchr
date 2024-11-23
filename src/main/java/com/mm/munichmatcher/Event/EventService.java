@@ -20,7 +20,8 @@ public class EventService {
     public List<Event> getFilteredEvents(User user) {
         List<String> interests = user.getInterests();
         List<String> userLanguagues = user.getLanguagues();
-        return getAllEvents().stream().filter(event -> event.getInterests().stream().anyMatch(interests::contains) && event.getLanguages().stream().anyMatch(userLanguagues::contains)).toList();
+        List<String> userPrefTypes = user.getPreferredTypesOfEvents();
+        return getAllEvents().stream().filter(event -> event.getInterests().stream().anyMatch(interests::contains) && event.getLanguages().stream().anyMatch(userLanguagues::contains) && userPrefTypes.stream().anyMatch(List.of(event.getTypeOfEvent())::contains)).toList();
     }
 
     public Event addEvent(Event event) {
