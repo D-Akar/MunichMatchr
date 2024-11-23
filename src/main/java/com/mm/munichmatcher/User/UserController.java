@@ -16,6 +16,18 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+    @GetMapping("/login/{email}/{password}")
+    public int loginVerification(@PathVariable String email, @PathVariable String password) {
+        User user = userService.getUserByEmail(email);
+        if (user == null) {
+            return 0;
+        }
+        if (user.getPassword().equals(password)) {
+            return 1;
+        }
+        return 0;
+    }
+
     @GetMapping("/get")
     public List<User> getAllUser() {
         return userService.getAllUsers();

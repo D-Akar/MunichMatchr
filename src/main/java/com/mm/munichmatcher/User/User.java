@@ -11,7 +11,7 @@ import java.util.List;
 public class User {
 
     @Id
-    private int id;
+    //private int id;
     private String email;
     private String name;
 
@@ -28,8 +28,8 @@ public class User {
     public User() {
     }
 
-    public User(int id, String email, String name, int eventCounter, List<String> languagues, List<String> interests, List<String> preferredTypesOfEvents, int coins, String password) {
-        this.id = id;
+    public User( String email, String name, int eventCounter, List<String> languagues, List<String> interests, List<String> preferredTypesOfEvents, int coins, String password) {
+
         this.email = email;
         this.name = name;
         this.eventCounter = eventCounter;
@@ -40,13 +40,6 @@ public class User {
         this.password = password;
     }
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
 
     public String getEmail() {
         return email;

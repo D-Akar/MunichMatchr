@@ -10,6 +10,7 @@ import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
 @Document(collection = "Event")
@@ -37,14 +38,16 @@ public class Event {
     private String date;
     private int duration;
 
-    @DBRef
+
     private List<String> approvedApplicants;
-    @DBRef
+
     private List<String> pendingApplicants;
+
+    private List<String> verifiedApplicants;
 
     public Event() {}
 
-    public Event(String id, String name, long lat, long lon, String description, String typeOfEvent, List<String> interests, List<String> languages, List<String> availability, List<String> accessibility, String date, int duration, List<String> approvedApplicants, List<String> pendingApplicants) {
+    public Event(String id, String name, long lat, long lon, String description, String typeOfEvent, List<String> interests, List<String> languages, List<String> availability, List<String> accessibility, String date, int duration, List<String> approvedApplicants, List<String> pendingApplicants, List<String> verifiedApplicants) {
         this.id = id;
         this.name = name;
         this.lat = lat;
@@ -59,6 +62,7 @@ public class Event {
         this.duration = duration;
         this.approvedApplicants = approvedApplicants;
         this.pendingApplicants = pendingApplicants;
+        this.verifiedApplicants = verifiedApplicants;
     }
 
     public String getId() {
@@ -171,5 +175,13 @@ public class Event {
 
     public void setPendingApplicants(List<String> pendingApplicants) {
         this.pendingApplicants = pendingApplicants;
+    }
+
+    public List<String> getVerifiedApplicants() {
+        return verifiedApplicants;
+    }
+
+    public void setVerifiedApplicants(List<String> verifiedApplicants) {
+        this.verifiedApplicants = verifiedApplicants;
     }
 }
