@@ -16,7 +16,7 @@ public class UserService {
     }
 
     public User getUserById(String id) {
-        return userRepository.findById(id).orElse(null);
+        return userRepository.findById(id).orElse(new User("Fail", "Fail"));
     }
 
     public User addUser(User user) {
