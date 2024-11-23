@@ -1,0 +1,13 @@
+Index: src/main/java/Entities/Organisation.java
+===================================================================
+diff --git a/src/main/java/Entities/Organisation.java b/src/main/java/Organisation/Organisation.java
+rename from src/main/java/Entities/Organisation.java
+rename to src/main/java/Organisation/Organisation.java
+--- a/src/main/java/Entities/Organisation.java	(revision 2e89bb1e4dca84b3713e027032d518314945a5ed)
++++ b/src/main/java/Organisation/Organisation.java	(date 1732315823571)
+@@ -1,4 +1,4 @@
+-package Entities;
++package Organisation;
+ 
+ import jakarta.persistence.Entity;
+ 

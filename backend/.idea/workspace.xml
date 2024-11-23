@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="c50f1c44-e117-4763-a3b7-ecce41c91297" name="Changes" comment="Added functionality to get lat and lon from address." />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Interface" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="main" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;flo1166&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/D-Akar/MunichMatchr.git&quot;,
+    &quot;accountId&quot;: &quot;5d206aec-4d5a-4349-813c-35b40e2bf61a&quot;
+  }
+}</component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="mavenHomeTypeForPersistence" value="WRAPPER" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 7
+}</component>
+  <component name="ProjectId" id="2pDt8wUVS4vRCl4IW97VODQMFLL" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.AddressAPI.executor": "Run",
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "Spring Boot.MunichMatcherApplication.executor": "Run",
+    "git-widget-placeholder": "master",
+    "ignore.virus.scanning.warn.message": "true",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Eigene Dateien/HackaTumProjekt/MunichMatchr",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="MunichMatcherApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="MunichMatcher" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.mm.munichmatcher.MunichMatcherApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-9823dce3aa75-28b599e66164-intellij.indexing.shared.core-IU-242.23339.11" />
+        <option value="bundled-js-predefined-d6986cc7102b-5c90d61e3bab-JavaScript-IU-242.23339.11" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="c50f1c44-e117-4763-a3b7-ecce41c91297" name="Changes" comment="" />
+      <created>1732312317392</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1732312317392</updated>
+      <workItem from="1732312319036" duration="992000" />
+      <workItem from="1732313342573" duration="13656000" />
+      <workItem from="1732345461469" duration="2896000" />
+      <workItem from="1732352644977" duration="24929000" />
+    </task>
+    <task id="LOCAL-00001" summary="Added dependencies for Mongo DB, added classes (Controller, Service, Repository) for Organisation">
+      <option name="closed" value="true" />
+      <created>1732326055855</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1732326055855</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Made MongoDB response">
+      <option name="closed" value="true" />
+      <created>1732347210276</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1732347210276</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Mongo DB works">
+      <option name="closed" value="true" />
+      <created>1732348350942</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1732348350942</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Worked on data fields and implementation for restfull in Organization.">
+      <option name="closed" value="true" />
+      <created>1732356823943</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1732356823943</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Deleted id">
+      <option name="closed" value="true" />
+      <created>1732361945087</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1732361945087</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Added queries for User and minor changes in Organisation">
+      <option name="closed" value="true" />
+      <created>1732366282040</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1732366282040</updated>
+    </task>
+    <task id="LOCAL-00007" summary="New changes">
+      <option name="closed" value="true" />
+      <created>1732367428803</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1732367428803</updated>
+    </task>
+    <task id="LOCAL-00008" summary="Event updated.">
+      <option name="closed" value="true" />
+      <created>1732378370289</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1732378370289</updated>
+    </task>
+    <task id="LOCAL-00009" summary="New User">
+      <option name="closed" value="true" />
+      <created>1732379994755</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1732379994755</updated>
+    </task>
+    <task id="LOCAL-00010" summary="Added functionality to get lat and lon from address.">
+      <option name="closed" value="true" />
+      <created>1732389566981</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1732389566981</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="master" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="user" />
+    <MESSAGE value="Added dependencies for Mongo DB, added classes (Controller, Service, Repository) for Organisation" />
+    <MESSAGE value="Made MongoDB response" />
+    <MESSAGE value="Mongo DB works" />
+    <MESSAGE value="Worked on data fields and implementation for restfull in Organization." />
+    <MESSAGE value="Deleted id" />
+    <MESSAGE value="Added queries for User and minor changes in Organisation" />
+    <MESSAGE value="New changes" />
+    <MESSAGE value="Event updated." />
+    <MESSAGE value="New User" />
+    <MESSAGE value="Added functionality to get lat and lon from address." />
+    <option name="LAST_COMMIT_MESSAGE" value="Added functionality to get lat and lon from address." />
+  </component>
+</project>

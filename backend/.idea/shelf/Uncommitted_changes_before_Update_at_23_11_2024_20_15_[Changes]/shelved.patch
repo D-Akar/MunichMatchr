@@ -1,0 +1,155 @@
+Index: src/main/java/com/mm/munichmatcher/User/UserRepository.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.mm.munichmatcher.User;\r\n\r\nimport org.springframework.data.mongodb.repository.MongoRepository;\r\nimport org.springframework.data.repository.CrudRepository;\r\nimport org.springframework.stereotype.Repository;\r\n\r\nimport java.util.Optional;\r\n\r\n@Repository\r\npublic interface UserRepository extends MongoRepository<User, String> {\r\n\r\n    User findByEmail(String email);\r\n\r\n    void deleteByEmail(String email);\r\n}\r\n\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/com/mm/munichmatcher/User/UserRepository.java b/src/main/java/com/mm/munichmatcher/User/UserRepository.java
+--- a/src/main/java/com/mm/munichmatcher/User/UserRepository.java	(revision ba9dd08a9322b962a58823179b69521eca242eac)
++++ b/src/main/java/com/mm/munichmatcher/User/UserRepository.java	(date 1732388831141)
+@@ -12,5 +12,8 @@
+     User findByEmail(String email);
+ 
+     void deleteByEmail(String email);
++
++    User findTopByOrderByIdDesc();
++
+ }
+ 
+Index: src/main/java/com/mm/munichmatcher/User/User.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.mm.munichmatcher.User;\r\n\r\nimport com.mm.munichmatcher.Entities.AgeGroup;\r\nimport com.mm.munichmatcher.Entities.Interest;\r\nimport jakarta.persistence.*;\r\nimport org.springframework.data.mongodb.core.mapping.Document;\r\n\r\nimport java.util.List;\r\n\r\n@Document(collection = \"User\")\r\npublic class User {\r\n\r\n    @Id\r\n    private int id;\r\n    private String email;\r\n    private String name;\r\n\r\n    private int eventCounter;\r\n\r\n    private List<String> languagues;\r\n    private List<String> interests;\r\n    private List<String> preferredTypesOfEvents;\r\n\r\n    private int coins;\r\n\r\n    private String password;\r\n\r\n    public User() {\r\n    }\r\n\r\n    public User(int id, String email, String name, int eventCounter, List<String> languagues, List<String> interests, List<String> preferredTypesOfEvents, int coins, String password) {\r\n        this.id = id;\r\n        this.email = email;\r\n        this.name = name;\r\n        this.eventCounter = eventCounter;\r\n        this.languagues = languagues;\r\n        this.interests = interests;\r\n        this.preferredTypesOfEvents = preferredTypesOfEvents;\r\n        this.coins = coins;\r\n        this.password = password;\r\n    }\r\n\r\n    public int getId() {\r\n        return id;\r\n    }\r\n\r\n    public void setId(int id) {\r\n        this.id = id;\r\n    }\r\n\r\n    public String getEmail() {\r\n        return email;\r\n    }\r\n\r\n    public void setEmail(String email) {\r\n        this.email = email;\r\n    }\r\n\r\n    public String getName() {\r\n        return name;\r\n    }\r\n\r\n    public void setName(String name) {\r\n        this.name = name;\r\n    }\r\n\r\n    public int getEventCounter() {\r\n        return eventCounter;\r\n    }\r\n\r\n    public void setEventCounter(int eventCounter) {\r\n        this.eventCounter = eventCounter;\r\n    }\r\n\r\n    public List<String> getLanguagues() {\r\n        return languagues;\r\n    }\r\n\r\n    public void setLanguagues(List<String> languagues) {\r\n        this.languagues = languagues;\r\n    }\r\n\r\n    public List<String> getInterests() {\r\n        return interests;\r\n    }\r\n\r\n    public void setInterests(List<String> interests) {\r\n        this.interests = interests;\r\n    }\r\n\r\n    public List<String> getPreferredTypesOfEvents() {\r\n        return preferredTypesOfEvents;\r\n    }\r\n\r\n    public void setPreferredTypesOfEvents(List<String> preferredTypesOfEvents) {\r\n        this.preferredTypesOfEvents = preferredTypesOfEvents;\r\n    }\r\n\r\n    public int getCoins() {\r\n        return coins;\r\n    }\r\n\r\n    public void setCoins(int coins) {\r\n        this.coins = coins;\r\n    }\r\n\r\n    public String getPassword() {\r\n        return password;\r\n    }\r\n\r\n    public void setPassword(String password) {\r\n        this.password = password;\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/com/mm/munichmatcher/User/User.java b/src/main/java/com/mm/munichmatcher/User/User.java
+--- a/src/main/java/com/mm/munichmatcher/User/User.java	(revision ba9dd08a9322b962a58823179b69521eca242eac)
++++ b/src/main/java/com/mm/munichmatcher/User/User.java	(date 1732383302967)
+@@ -11,7 +11,7 @@
+ public class User {
+ 
+     @Id
+-    private int id;
++    private String id;
+     private String email;
+     private String name;
+ 
+@@ -28,23 +28,23 @@
+     public User() {
+     }
+ 
+-    public User(int id, String email, String name, int eventCounter, List<String> languagues, List<String> interests, List<String> preferredTypesOfEvents, int coins, String password) {
++    public User(String id, String email, String name, List<String> languagues, List<String> interests, List<String> preferredTypesOfEvents, String password) {
+         this.id = id;
+         this.email = email;
+         this.name = name;
+-        this.eventCounter = eventCounter;
++        this.eventCounter = 0;
+         this.languagues = languagues;
+         this.interests = interests;
+         this.preferredTypesOfEvents = preferredTypesOfEvents;
+-        this.coins = coins;
++        this.coins = 0;
+         this.password = password;
+     }
+ 
+-    public int getId() {
++    public String getId() {
+         return id;
+     }
+ 
+-    public void setId(int id) {
++    public void setId(String id) {
+         this.id = id;
+     }
+ 
+Index: src/main/java/com/mm/munichmatcher/User/UserService.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.mm.munichmatcher.User;\r\n\r\nimport org.springframework.beans.factory.annotation.Autowired;\r\nimport org.springframework.stereotype.Service;\r\n\r\nimport java.util.List;\r\n\r\n@Service\r\npublic class UserService {\r\n\r\n    @Autowired\r\n    private UserRepository userRepository;\r\n\r\n    public List<User> getAllUsers() {\r\n        return userRepository.findAll();\r\n    }\r\n\r\n    public User getUserByEmail(String email) {\r\n        return userRepository.findByEmail(email); //.orElse(new User(\"fail\", \"Fail\"));\r\n    }\r\n\r\n    public User addUser(User user) {\r\n        return userRepository.save(user);\r\n    }\r\n\r\n    public void deleteUser(String email) {\r\n        userRepository.deleteByEmail(email);\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/com/mm/munichmatcher/User/UserService.java b/src/main/java/com/mm/munichmatcher/User/UserService.java
+--- a/src/main/java/com/mm/munichmatcher/User/UserService.java	(revision ba9dd08a9322b962a58823179b69521eca242eac)
++++ b/src/main/java/com/mm/munichmatcher/User/UserService.java	(date 1732388831148)
+@@ -16,10 +16,19 @@
+     }
+ 
+     public User getUserByEmail(String email) {
+-        return userRepository.findByEmail(email); //.orElse(new User("fail", "Fail"));
++        return userRepository.findByEmail(email); //.orElse(null);
+     }
+ 
+     public User addUser(User user) {
++
++        List<User> allUsers = getAllUsers();
++
++        // check if user exists in all users
++        for (User existingUser : allUsers) {
++            if (existingUser.getName().equals(user.getName())) {
++                return null;
++            }
++        }
+         return userRepository.save(user);
+     }
+ 
+Index: src/main/java/com/mm/munichmatcher/UserEvent/UserEventController.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.mm.munichmatcher.UserEvent;\r\n\r\nimport com.mm.munichmatcher.Event.Event;\r\nimport com.mm.munichmatcher.Event.EventService;\r\nimport com.mm.munichmatcher.User.User;\r\nimport com.mm.munichmatcher.User.UserService;\r\nimport org.springframework.beans.factory.annotation.Autowired;\r\nimport org.springframework.web.bind.annotation.*;\r\n\r\nimport java.util.List;\r\n\r\n@RestController\r\n@RequestMapping(\"/userEvent\")\r\npublic class UserEventController {\r\n\r\n    @Autowired\r\n    private UserService userService;\r\n    @Autowired\r\n    private EventService eventService;\r\n\r\n    @GetMapping(\"/getFiltered/{email}\")\r\n    public List<Event> getFilteredEvents(@PathVariable String email) {\r\n        User user = userService.getUserByEmail(email);\r\n        return eventService.getFilteredEvents(user);\r\n    }\r\n\r\n    /*@PutMapping(\"/anmeldung/{email}/{eventName}\")\r\n    public void anmelden(@PathVariable String email, @PathVariable String eventName) {\r\n        User user = userService.getUserByEmail(email);\r\n        if (user == null) {\r\n            throw new RuntimeException(\"User mit Email \" + email + \" nicht gefunden.\");\r\n        }\r\n\r\n        Event event = eventService.getEventByName(eventName);\r\n        if (event == null) {\r\n            throw new RuntimeException(\"Event mit Name \" + eventName + \" nicht gefunden.\");\r\n        }\r\n        if(event.getApplicants() != null) {\r\n            event.getApplicants().add(user);\r\n        }\r\n        else {\r\n            event.setApplicants(List.of(user));\r\n        }\r\n        eventService.addEvent(event); //save\r\n    }*/\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/com/mm/munichmatcher/UserEvent/UserEventController.java b/src/main/java/com/mm/munichmatcher/UserEvent/UserEventController.java
+--- a/src/main/java/com/mm/munichmatcher/UserEvent/UserEventController.java	(revision ba9dd08a9322b962a58823179b69521eca242eac)
++++ b/src/main/java/com/mm/munichmatcher/UserEvent/UserEventController.java	(date 1732388040851)
+@@ -1,46 +1,0 @@
+-package com.mm.munichmatcher.UserEvent;
+-
+-import com.mm.munichmatcher.Event.Event;
+-import com.mm.munichmatcher.Event.EventService;
+-import com.mm.munichmatcher.User.User;
+-import com.mm.munichmatcher.User.UserService;
+-import org.springframework.beans.factory.annotation.Autowired;
+-import org.springframework.web.bind.annotation.*;
+-
+-import java.util.List;
+-
+-@RestController
+-@RequestMapping("/userEvent")
+-public class UserEventController {
+-
+-    @Autowired
+-    private UserService userService;
+-    @Autowired
+-    private EventService eventService;
+-
+-    @GetMapping("/getFiltered/{email}")
+-    public List<Event> getFilteredEvents(@PathVariable String email) {
+-        User user = userService.getUserByEmail(email);
+-        return eventService.getFilteredEvents(user);
+-    }
+-
+-    /*@PutMapping("/anmeldung/{email}/{eventName}")
+-    public void anmelden(@PathVariable String email, @PathVariable String eventName) {
+-        User user = userService.getUserByEmail(email);
+-        if (user == null) {
+-            throw new RuntimeException("User mit Email " + email + " nicht gefunden.");
+-        }
+-
+-        Event event = eventService.getEventByName(eventName);
+-        if (event == null) {
+-            throw new RuntimeException("Event mit Name " + eventName + " nicht gefunden.");
+-        }
+-        if(event.getApplicants() != null) {
+-            event.getApplicants().add(user);
+-        }
+-        else {
+-            event.setApplicants(List.of(user));
+-        }
+-        eventService.addEvent(event); //save
+-    }*/
+-}

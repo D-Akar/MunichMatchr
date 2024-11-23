@@ -1,0 +1,61 @@
+Index: src/main/java/com/mm/munichmatcher/User/UserController.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.mm.munichmatcher.User;\r\n\r\nimport org.springframework.beans.factory.annotation.Autowired;\r\nimport org.springframework.web.bind.annotation.*;\r\n\r\nimport java.util.List;\r\nimport java.util.Optional;\r\n\r\n@RestController\r\n@RequestMapping(\"/user\")\r\npublic class UserController {\r\n\r\n    @Autowired\r\n    private UserService userService;\r\n\r\n    @GetMapping(\"/get\")\r\n    public List<User> getAllUser() {\r\n        return userService.getAllUsers();\r\n    }\r\n\r\n    @GetMapping(\"/get/{email}\")\r\n    public User getUserById(@PathVariable String email) {\r\n        return userService.getUserByEmail(email);\r\n    }\r\n\r\n    @PostMapping(\"/add\")\r\n    public User addUser(@RequestBody User user) {\r\n        return userService.addUser(user);\r\n    }\r\n\r\n    @DeleteMapping(\"/delete/{email}\")\r\n    public void deleteUser(@PathVariable String email) {\r\n        userService.deleteUser(email);\r\n    }\r\n\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/com/mm/munichmatcher/User/UserController.java b/src/main/java/com/mm/munichmatcher/User/UserController.java
+--- a/src/main/java/com/mm/munichmatcher/User/UserController.java	(revision a72f181d156cc8c2d2526409da912fc703c87c7c)
++++ b/src/main/java/com/mm/munichmatcher/User/UserController.java	(date 1732373741860)
+@@ -1,10 +1,13 @@
+ package com.mm.munichmatcher.User;
+ 
++import com.opencagedata.jopencage.JOpenCageGeocoder;
++import com.opencagedata.jopencage.model.JOpenCageForwardRequest;
++import com.opencagedata.jopencage.model.JOpenCageLatLng;
++import com.opencagedata.jopencage.model.JOpenCageResponse;
+ import org.springframework.beans.factory.annotation.Autowired;
+ import org.springframework.web.bind.annotation.*;
+ 
+ import java.util.List;
+-import java.util.Optional;
+ 
+ @RestController
+ @RequestMapping("/user")
+@@ -19,7 +22,7 @@
+     }
+ 
+     @GetMapping("/get/{email}")
+-    public User getUserById(@PathVariable String email) {
++    public User getUserById(@PathVariable String email, String address) {
+         return userService.getUserByEmail(email);
+     }
+ 
+Index: pom.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project xmlns=\"http://maven.apache.org/POM/4.0.0\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\r\n         xsi:schemaLocation=\"http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd\">\r\n    <modelVersion>4.0.0</modelVersion>\r\n    <parent>\r\n        <groupId>org.springframework.boot</groupId>\r\n        <artifactId>spring-boot-starter-parent</artifactId>\r\n        <version>3.4.0</version>\r\n        <relativePath/> <!-- lookup parent from repository -->\r\n    </parent>\r\n    <groupId>com.MM</groupId>\r\n    <artifactId>MunichMatcher</artifactId>\r\n    <version>0.0.1-SNAPSHOT</version>\r\n    <name>MunichMatcher</name>\r\n    <description>MunichMatcher</description>\r\n    <url/>\r\n    <licenses>\r\n        <license/>\r\n    </licenses>\r\n    <developers>\r\n        <developer/>\r\n    </developers>\r\n    <scm>\r\n        <connection/>\r\n        <developerConnection/>\r\n        <tag/>\r\n        <url/>\r\n    </scm>\r\n    <properties>\r\n        <java.version>17</java.version>\r\n    </properties>\r\n    <dependencies>\r\n        <dependency>\r\n            <groupId>org.springframework.boot</groupId>\r\n            <artifactId>spring-boot-starter-data-jpa</artifactId>\r\n        </dependency>\r\n        <dependency>\r\n            <groupId>org.springframework.boot</groupId>\r\n            <artifactId>spring-boot-starter-web</artifactId>\r\n        </dependency>\r\n        <dependency>\r\n            <groupId>org.apache.derby</groupId>\r\n            <artifactId>derby</artifactId>\r\n            <version>10.16.1.1</version>\r\n            <scope>runtime</scope>\r\n        </dependency>\r\n        <dependency>\r\n            <groupId>org.apache.derby</groupId>\r\n            <artifactId>derby</artifactId>\r\n            <scope>runtime</scope>\r\n        </dependency>\r\n        <dependency>\r\n            <groupId>org.springframework.boot</groupId>\r\n            <artifactId>spring-boot-starter-data-mongodb</artifactId>\r\n        </dependency>\r\n        <dependency>\r\n            <groupId>org.mongodb</groupId>\r\n            <artifactId>mongodb-driver-sync</artifactId>\r\n            <version>5.2.0</version>\r\n        </dependency>\r\n        <dependency>\r\n            <groupId>org.apache.derby</groupId>\r\n            <artifactId>derbytools</artifactId>\r\n            <scope>runtime</scope>\r\n        </dependency>\r\n        <dependency>\r\n            <groupId>org.springframework.boot</groupId>\r\n            <artifactId>spring-boot-starter-test</artifactId>\r\n            <scope>test</scope>\r\n        </dependency>\r\n    </dependencies>\r\n\r\n    <build>\r\n        <plugins>\r\n            <plugin>\r\n                <groupId>org.springframework.boot</groupId>\r\n                <artifactId>spring-boot-maven-plugin</artifactId>\r\n            </plugin>\r\n        </plugins>\r\n    </build>\r\n\r\n</project>\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/pom.xml b/pom.xml
+--- a/pom.xml	(revision a72f181d156cc8c2d2526409da912fc703c87c7c)
++++ b/pom.xml	(date 1732369103598)
+@@ -45,6 +45,16 @@
+             <scope>runtime</scope>
+         </dependency>
+         <dependency>
++            <groupId>com.fasterxml.jackson.core</groupId>
++            <artifactId>jackson-databind</artifactId>
++            <version>2.15.2</version>
++        </dependency>
++        <dependency>
++            <groupId>com.opencagedata</groupId>
++            <artifactId>jopencage</artifactId>
++            <version>2.2.2</version>
++        </dependency>
++        <dependency>
+             <groupId>org.apache.derby</groupId>
+             <artifactId>derby</artifactId>
+             <scope>runtime</scope>

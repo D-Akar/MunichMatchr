@@ -1,0 +1,29 @@
+Index: src/main/java/com/mm/munichmatcher/User/UserService.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.mm.munichmatcher.User;\r\n\r\nimport org.springframework.beans.factory.annotation.Autowired;\r\nimport org.springframework.stereotype.Service;\r\n\r\nimport java.util.List;\r\n\r\n@Service\r\npublic class UserService {\r\n\r\n    @Autowired\r\n    private UserRepository userRepository;\r\n\r\n    public List<User> getAllUsers() {\r\n        return userRepository.findAll();\r\n    }\r\n\r\n    public User getUserByEmail(String email) {\r\n        return userRepository.findByEmail(email); //.orElse(new User(\"fail\", \"Fail\"));\r\n    }\r\n\r\n    public User addUser(User user) {\r\n        return userRepository.save(user);\r\n    }\r\n\r\n    public void deleteUser(String email) {\r\n        userRepository.deleteByEmail(email);\r\n    }\r\n}
+===================================================================
+diff --git a/src/main/java/com/mm/munichmatcher/User/UserService.java b/src/main/java/com/mm/munichmatcher/User/UserService.java
+--- a/src/main/java/com/mm/munichmatcher/User/UserService.java	(revision 67e1f1429e2e7c2333175c973c58dd600f32537f)
++++ b/src/main/java/com/mm/munichmatcher/User/UserService.java	(date 1732389389876)
+@@ -16,10 +16,19 @@
+     }
+ 
+     public User getUserByEmail(String email) {
+-        return userRepository.findByEmail(email); //.orElse(new User("fail", "Fail"));
++        return userRepository.findByEmail(email); //.orElse(null);
+     }
+ 
+     public User addUser(User user) {
++
++        List<User> allUsers = getAllUsers();
++
++        // check if user exists in all users
++        for (User existingUser : allUsers) {
++            if (existingUser.getName().equals(user.getName())) {
++                return null;
++            }
++        }
+         return userRepository.save(user);
+     }
+ 

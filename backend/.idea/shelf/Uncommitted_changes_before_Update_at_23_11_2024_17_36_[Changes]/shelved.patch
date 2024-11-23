@@ -1,0 +1,44 @@
+Index: src/main/java/com/mm/munichmatcher/User/User.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.mm.munichmatcher.User;\r\n\r\nimport com.mm.munichmatcher.Entities.AgeGroup;\r\nimport com.mm.munichmatcher.Entities.Interest;\r\nimport jakarta.persistence.*;\r\nimport org.springframework.data.mongodb.core.mapping.Document;\r\n\r\nimport java.util.List;\r\n\r\n@Document(collection = \"User\")\r\npublic class User {\r\n\r\n    @Id\r\n    private int id;\r\n    private String email;\r\n    private String name;\r\n\r\n    private int age;\r\n    private String languague;\r\n    private List<String> interests;\r\n\r\n    private int coins;\r\n\r\n    public User() {}\r\n\r\n    public User(String email, String name, int age, String languague, List<String> interests) {\r\n        this.email = email;\r\n        this.name = name;\r\n        this.age = age;\r\n        this.languague = languague;\r\n        this.interests = interests;\r\n        this.coins = 0;\r\n    }\r\n\r\n    public String getEmail() {\r\n        return email;\r\n    }\r\n\r\n    public void setEmail(String email) {\r\n        this.email = email;\r\n    }\r\n\r\n    public String getName() {\r\n        return name;\r\n    }\r\n\r\n    public void setName(String name) {\r\n        this.name = name;\r\n    }\r\n\r\n    public int getAge() {\r\n        return age;\r\n    }\r\n\r\n    public void setAge(int age) {\r\n        this.age = age;\r\n    }\r\n\r\n    public String getLanguague() {\r\n        return languague;\r\n    }\r\n\r\n    public void setLanguague(String languague) {\r\n        this.languague = languague;\r\n    }\r\n\r\n    public List<String> getInterests() {\r\n        return interests;\r\n    }\r\n\r\n    public void setInterests(List<String> interests) {\r\n        this.interests = interests;\r\n    }\r\n\r\n    public int getCoins() {\r\n        return coins;\r\n    }\r\n\r\n    public void setCoins(int coins) {\r\n        this.coins = coins;\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/com/mm/munichmatcher/User/User.java b/src/main/java/com/mm/munichmatcher/User/User.java
+--- a/src/main/java/com/mm/munichmatcher/User/User.java	(revision 3942573d4f15787b0d9c0b6095109835ec6dfd08)
++++ b/src/main/java/com/mm/munichmatcher/User/User.java	(date 1732379772297)
+@@ -16,14 +16,17 @@
+     private String name;
+ 
+     private int age;
+-    private String languague;
++    private List<String> languague;
+     private List<String> interests;
+ 
+     private int coins;
+ 
++    private String logName;
++    private String password;
++
+     public User() {}
+ 
+-    public User(String email, String name, int age, String languague, List<String> interests) {
++    public User(String email, String name, int age, List<String> languague, List<String> interests) {
+         this.email = email;
+         this.name = name;
+         this.age = age;
+@@ -56,13 +59,7 @@
+         this.age = age;
+     }
+ 
+-    public String getLanguague() {
+-        return languague;
+-    }
+ 
+-    public void setLanguague(String languague) {
+-        this.languague = languague;
+-    }
+ 
+     public List<String> getInterests() {
+         return interests;
