@@ -1,95 +1,3 @@
-<script setup>
-import HeaderBlock from "@/components/HeaderBlock.vue";
-import PopupContent from "@/components/PopupContent.vue";
-
-import { ref } from "vue";
-import {
-  Dialog,
-  DialogPanel,
-  Disclosure,
-  DisclosureButton,
-  DisclosurePanel,
-  Menu,
-  MenuButton,
-  MenuItem,
-  MenuItems,
-  TransitionChild,
-  TransitionRoot,
-} from "@headlessui/vue";
-import { XMarkIcon } from "@heroicons/vue/24/outline";
-import {
-  ChevronDownIcon,
-  FunnelIcon,
-  MinusIcon,
-  PlusIcon,
-  Squares2X2Icon,
-} from "@heroicons/vue/20/solid";
-
-import { useHead } from "@vueuse/head";
-
-import "leaflet/dist/leaflet.css";
-import { LMap, LTileLayer, LMarker, LPopup} from "@vue-leaflet/vue-leaflet";
-import arcades from "@/assets/arcades.json"
-
-let zoom = ref(11);
-let center = ref([48.1351, 11.5820]);
-
-const subCategories = [
-  { name: "Youth group/outreach program", href: "#" },
-  { name: "Retirement home", href: "#" },
-  { name: "Care facility", href: "#" },
-];
-const filters = [
-  {
-    id: "length",
-    name: "Length",
-    options: [
-      { value: "singleDay", label: "Single Day", checked: false },
-      { value: "multiDay", label: "Multi-day", checked: false },
-      { value: "multiWeek", label: "Multi-week", checked: true },
-      { value: "flexible", label: "Flexible", checked: false },
-    ],
-  },
-  {
-    id: "interests",
-    name: "Interests",
-    options: [
-      { value: "literature", label: "Literature", checked: false },
-      { value: "sports", label: "Sports", checked: false },
-      { value: "science", label: "Science", checked: true },
-      { value: "history", label: "History", checked: false },
-      { value: "philosophy", label: "Philosophy", checked: false },
-      { value: "travel", label: "Travel", checked: false },
-    ],
-  },
-  {
-    id: "languages",
-    name: "Languages",
-    options: [
-      { value: "german", label: "German", checked: false },
-      { value: "englisch", label: "English", checked: false },
-      { value: "turkish", label: "Turkish", checked: false },
-      { value: "...", label: "...", checked: false },
-    ],
-  },
-  {
-    id: "accessibility",
-    name: "Accessibility",
-    options: [
-      { value: "wheelchairFriendly", label: "Wheelchair accessible", checked: false },
-      { value: "publicTransport", label: "Public transportation nearby", checked: false },
-    ],
-  },
-  {
-    id: "proximity",
-    name: "Proximity",
-    options: [{ value: "2l", label: "TBD", checked: false }],
-  },
-];
-
-const mobileFiltersOpen = ref(false);
-</script>
-
 <template>
   <main class="flex h-full flex-col">
     <HeaderBlock />
@@ -178,7 +86,7 @@ const mobileFiltersOpen = ref(false);
                               :name="`${section.id}[]`"
                               :value="option.value"
                               type="checkbox"
-                              :checked="option.checked"
+                              v-model="selectedFilters[section.id]"
                               class="size-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
                             />
                             <label
@@ -199,7 +107,7 @@ const mobileFiltersOpen = ref(false);
 
         <main class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div
-            class="flex items-baseline justify-between border-b border-gray-200 pb-6 pt-8"
+            class="flex items-baseline justify-between border-b border-gray-200 pb-6 pt-2"
           >
             <h1 class="text-4xl font-bold tracking-tight text-gray-900">
               Bring a Smile to Someone's Face
@@ -297,7 +205,8 @@ const mobileFiltersOpen = ref(false);
                           :name="`${section.id}[]`"
                           :value="option.value"
                           type="checkbox"
-                          :checked="option.checked"
+                          v-model="selectedFilters[section.id]"
+                          @change="handleFilterChange(section.id, option.value, $event.target.checked)"
                           class="size-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
                         />
                         <label
@@ -327,12 +236,15 @@ const mobileFiltersOpen = ref(false);
                       name="Stadia Maps Basemap"
                     ></l-tile-layer>
                     <l-marker
-                      v-for="(arcade, index) in arcades"
+                      v-for="(arcade, index) in filteredArcades"
                       :key="index"
                       :lat-lng="[arcade.lat, arcade.lng]"
                     >
                       <l-popup>
-                        <PopupContent :title="arcade.name" :description="arcade.description" />
+                        <PopupContent
+                          :title="arcade.name"
+                          :description="arcade.description"
+                        />
                       </l-popup>
                     </l-marker>
                   </l-map>
@@ -343,8 +255,194 @@ const mobileFiltersOpen = ref(false);
         </main>
       </div>
     </div>
+    <div v-if="showPreferencesPopup" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-100">
+      <div class="bg-white shadow sm:rounded-lg">
+        <div class="px-4 py-5 sm:p-6">
+          <h3 class="text-base font-semibold text-gray-900">Tell us more about yourself!</h3>
+          <div class="mt-2 max-w-xl text-sm text-gray-500">
+            <p>Please be sure to select at least one item in each category.</p>
+          </div>
+          <div class="mt-5">
+            <button type="button" class="inline-flex items-center rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500">Submit</button>
+          </div>
+        </div>
+      </div>
+    </div>
   </main>
 </template>
+
+<script setup>
+import HeaderBlock from "@/components/HeaderBlock.vue";
+import PopupContent from "@/components/PopupContent.vue";
+
+import {
+  Dialog,
+  DialogPanel,
+  Disclosure,
+  DisclosureButton,
+  DisclosurePanel,
+  Menu,
+  MenuButton,
+  MenuItem,
+  MenuItems,
+  TransitionChild,
+  TransitionRoot,
+} from "@headlessui/vue";
+import { XMarkIcon } from "@heroicons/vue/24/outline";
+import {
+  ChevronDownIcon,
+  FunnelIcon,
+  MinusIcon,
+  PlusIcon,
+  Squares2X2Icon,
+} from "@heroicons/vue/20/solid";
+
+import { ref, reactive, watch, onMounted } from "vue";
+import "leaflet/dist/leaflet.css";
+import { LMap, LTileLayer, LMarker, LPopup } from "@vue-leaflet/vue-leaflet";
+import arcades from "@/assets/arcades.json";
+
+const selectedFilters = reactive({
+  availability: [],
+  interestFields: [],
+  languages: [],
+  accessibility: []
+});
+const filteredArcades = ref(arcades);
+
+let zoom = ref(11);
+let center = ref([48.1351, 11.582]);
+
+const filterArcades = () => {
+  filteredArcades.value = arcades.filter((arcade) => {
+    // If all filters are empty, include all arcades
+    const noFiltersApplied = Object.values(selectedFilters).every(
+      (filter) => filter.length === 0
+    );
+    if (noFiltersApplied) return true;
+
+    return (
+      (selectedFilters.interestFields.length === 0 ||
+        selectedFilters.interestFields.some((field) =>
+          (arcade.details?.interestFields || []).map(f => f.toLowerCase()).includes(field)
+        )) &&
+      (selectedFilters.availability.length === 0 ||
+        selectedFilters.availability.some((availability) =>
+          (arcade.details?.availability || []).includes(availability)
+        )) && 
+      (selectedFilters.languages.length === 0 ||
+        selectedFilters.languages.some((language) =>
+          (arcade.details?.languages || []).includes(language)
+        )) &&
+      (selectedFilters.accessibility.length === 0 ||
+        selectedFilters.accessibility.some((access) =>
+          (arcade.details?.accessibility || []).includes(access)
+        ))
+    );
+  });
+};
+
+watch(
+  () => selectedFilters,
+  filterArcades,
+  { deep: true } // Ensures nested properties are observed
+);
+
+const subCategories = [
+  { name: "Youth group/outreach program", href: "#" },
+  { name: "Retirement home", href: "#" },
+  { name: "Care facility", href: "#" },
+];
+const filters = [
+  {
+    id: "availability",
+    name: "Availability",
+    options: [
+      { value: "1hour", label: "1 hour", checked: false },
+      { value: "multiHour", label: "2-3 hours", checked: false },
+      { value: "fullDay", label: "Full-day", checked: true },
+      { value: "flexible", label: "Flexible", checked: false },
+    ],
+  },
+  {
+    id: "interestFields",
+    name: "Interests",
+    options: [
+      { value: "literature", label: "Literature", checked: false },
+      { value: "sports", label: "Sports", checked: false },
+      { value: "science", label: "Science", checked: true },
+      { value: "history", label: "History", checked: false },
+      { value: "philosophy", label: "Philosophy", checked: false },
+      { value: "travel", label: "Travel", checked: false },
+      { value: "cooking", label: "Cooking", checked: false },
+    ],
+  },
+  {
+    id: "languages",
+    name: "Languages",
+    options: [
+      { value: "german", label: "German", checked: false },
+      { value: "englisch", label: "English", checked: false },
+      { value: "turkish", label: "Turkish", checked: false },
+      { value: "...", label: "...", checked: false },
+    ],
+  },
+  {
+    id: "accessibility",
+    name: "Accessibility",
+    options: [
+      { value: "wheelchairFriendly", label: "Wheelchair accessible", checked: false },
+      { value: "publicTransport", label: "Public transportation nearby", checked: false },
+    ],
+  },
+];
+
+const mobileFiltersOpen = ref(false);
+
+const resetFilters = () => {
+  Object.keys(selectedFilters).forEach(key => {
+    selectedFilters[key] = [];
+  });
+};
+
+// Add these refs/functions after other refs
+const showPreferencesPopup = ref(false);
+
+// Function to check if preferences exist
+const checkPreferences = () => {
+  const preferences = localStorage.getItem('preferences');
+  if (!preferences) {
+    showPreferencesPopup.value = true;
+  }
+};
+
+// Function to save preferences
+const savePreferences = (preferencesData) => {
+  localStorage.setItem('preferences', JSON.stringify(preferencesData));
+  showPreferencesPopup.value = false;
+};
+
+// Function to close popup
+const closePreferencesPopup = () => {
+  showPreferencesPopup.value = false;
+};
+
+// Add this to your existing onMounted
+onMounted(() => {
+  resetFilters();
+  checkPreferences();
+});
+
+// Add this to debug filter changes
+watch(selectedFilters, (newValue) => {
+  console.log('Selected filters updated:', newValue);
+}, { deep: true });
+
+// Add this method to debug checkbox changes
+const handleFilterChange = (sectionId, value, checked) => {
+  console.log(`Filter changed: ${sectionId}, value: ${value}, checked: ${checked}`);
+};
+</script>
 
 <style>
 #map {
@@ -354,5 +452,13 @@ const mobileFiltersOpen = ref(false);
 
 .leaflet-popup-content-wrapper {
   width: 200px;
+}
+
+.z-100 {
+  z-index: 9999;
+}
+
+.leaflet-container {
+  z-index: 1;
 }
 </style>
