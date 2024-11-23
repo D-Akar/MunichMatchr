@@ -15,8 +15,8 @@ public class UserService {
         return userRepository.findAll();
     }
 
-    public User getUserById(String id) {
-        return userRepository.findById(id).orElse(new User("Fail", "Fail"));
+    public User getUserByEmail(String email) {
+        return userRepository.findByEmail(email); //.orElse(new User("fail", "Fail"));
     }
 
     public User addUser(User user) {

@@ -7,20 +7,20 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/api/users")
+@RequestMapping("/user")
 public class UserController {
 
     @Autowired
     private UserService userService;
 
-    @GetMapping
+    @GetMapping("/get")
     public List<User> getAllUser() {
         return userService.getAllUsers();
     }
 
-    @GetMapping("/{id}")
-    public User getUserById(@PathVariable String id) {
-        return userService.getUserById(id);
+    @GetMapping("/get/{email}")
+    public User getUserById(@PathVariable String email) {
+        return userService.getUserByEmail(email);
     }
 
     @PostMapping("/add")

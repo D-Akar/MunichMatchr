@@ -2,9 +2,7 @@ package com.mm.munichmatcher.User;
 
 import com.mm.munichmatcher.Entities.Geschlecht;
 import com.mm.munichmatcher.Entities.Interest;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.*;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.List;
@@ -12,22 +10,22 @@ import java.util.List;
 public class User {
 
     @Id
-    private String id;
+    private String email;
     private String name;
 
     public User() {}
 
-    public User(String id, String name) {
-        this.id = id;
+    public User(String email, String name) {
+        this.email = email;
         this.name = name;
     }
 
-    public String getId() {
-        return id;
+    public String getEmail() {
+        return email;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getName() {
