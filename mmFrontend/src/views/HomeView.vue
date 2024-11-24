@@ -336,7 +336,8 @@ const arcades = ref([]);
 
 const fetchArcades = async () => {
   try {
-    const response = await fetch('http://localhost:8080/userEvent/getFiltered/user9@example.com');
+    const userEmail = localStorage.getItem('userEmail');
+    const response = await fetch(`http://localhost:8080/userEvent/getFiltered/${userEmail}`);
     if (!response.ok) {
       throw new Error('Network response was not ok');
     }
