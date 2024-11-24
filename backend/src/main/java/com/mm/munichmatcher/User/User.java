@@ -21,15 +21,18 @@ public class User {
     private List<String> interests;
     private List<String> preferredTypesOfEvents;
 
+
     private int coins;
 
     private String password;
 
+    private int isAdmin;
+    private String organisationEmail;
+
     public User() {
     }
 
-    public User( String email, String name, int eventCounter, List<String> languagues, List<String> interests, List<String> preferredTypesOfEvents, int coins, String password) {
-
+    public User(String email, String name, int eventCounter, List<String> languagues, List<String> interests, List<String> preferredTypesOfEvents, int coins, String password, int isAdmin, String organisationEmail) {
         this.email = email;
         this.name = name;
         this.eventCounter = eventCounter;
@@ -38,8 +41,9 @@ public class User {
         this.preferredTypesOfEvents = preferredTypesOfEvents;
         this.coins = coins;
         this.password = password;
+        this.isAdmin = isAdmin;
+        this.organisationEmail = organisationEmail;
     }
-
 
     public String getEmail() {
         return email;
@@ -103,5 +107,21 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public int getIsAdmin() {
+        return isAdmin;
+    }
+
+    public void setIsAdmin(int isAdmin) {
+        this.isAdmin = isAdmin;
+    }
+
+    public String getOrganisationEmail() {
+        return organisationEmail;
+    }
+
+    public void setOrganisationEmail(String organisationEmail) {
+        this.organisationEmail = organisationEmail;
     }
 }

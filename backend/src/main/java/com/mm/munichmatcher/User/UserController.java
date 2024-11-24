@@ -23,6 +23,9 @@ public class UserController {
             return 0;
         }
         if (user.getPassword().equals(password)) {
+            if(user.getIsAdmin() == 1) {
+                return 2;
+            }
             return 1;
         }
         return 0;
