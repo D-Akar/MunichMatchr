@@ -18,7 +18,7 @@ public class User {
 
     private int eventCounter;
 
-    private List<String> languagues;
+    private List<String> languages;
     private List<String> interests;
     private List<String> preferredTypesOfEvents;
 
@@ -33,12 +33,12 @@ public class User {
     public User() {
     }
 
-    public User(String email, String vorname, String nachname, int eventCounter, List<String> languagues, List<String> interests, List<String> preferredTypesOfEvents, int coins, String password, int isAdmin, String organisationName) {
+    public User(String email, String vorname, String nachname, int eventCounter, List<String> languages, List<String> interests, List<String> preferredTypesOfEvents, int coins, String password, int isAdmin, String organisationName) {
         this.email = email;
         this.vorname = vorname;
         this.nachname = nachname;
         this.eventCounter = eventCounter;
-        this.languagues = languagues;
+        this.languages = languages;
         this.interests = interests;
         this.preferredTypesOfEvents = preferredTypesOfEvents;
         this.coins = coins;
@@ -79,12 +79,12 @@ public class User {
         this.eventCounter = eventCounter;
     }
 
-    public List<String> getLanguagues() {
-        return languagues;
+    public List<String> getLanguages() {
+        return languages;
     }
 
-    public void setLanguagues(List<String> languagues) {
-        this.languagues = languagues;
+    public void setLanguages(List<String> languages) {
+        this.languages = languages;
     }
 
     public List<String> getInterests() {
