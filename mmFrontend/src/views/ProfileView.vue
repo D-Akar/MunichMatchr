@@ -9,7 +9,7 @@
         <div class="w-full max-w-4xl bg-white p-6 rounded-lg shadow-lg">
           <div class="mb-6">
             <p class="text-lg font-semibold">
-              Events Attended: 4<span class="text-indigo-600">{{ attendedEvents }}</span>
+              Events Attended: <span class="text-indigo-600">{{ attendedEvents }}</span>
             </p>
           </div>
           <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -71,7 +71,7 @@
 <script setup>
 import HeaderBlock from "@/components/HeaderBlock.vue";
 import PopupComponent from './Popup.vue';
-import { ref } from "vue";
+import { ref, onMounted } from "vue";
 import { useRouter } from 'vue-router';
 
 const router = useRouter();
@@ -93,6 +93,7 @@ const steps = [
   { name: "Event Types", href: "#", status: "upcoming", step: 2 },
 ];
 const selectedItems = ref([]);
+const attendedEvents = ref(4);
 
 const showPopup = () => {
   isPopupVisible.value = true;
@@ -121,7 +122,29 @@ const handleSubmit = () => {
   router.push({ name: 'Profile' });
 };
 
+const fetchUserData = async () => {
+  const userEmail = localStorage.getItem('userEmail');
+  if (userEmail) {
+    try {
+      const response = await fetch(`http://localhost:8080/user/get/${userEmail}`);
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      const data = await response.json();
+      const { eventCounter, name } = data;
+      profileData.value.firstName = name;
+      profileData.value.lastName = name;
+      attendedEvents.value = eventCounter;
+    } catch (error) {
+      console.error("Error fetching user data:", error);
+    }
+  }
+};
 
+// Fetch user data when the component is mounted
+onMounted(() => {
+  fetchUserData();
+});
 
 const handleInterests = () => {
   showPopup();

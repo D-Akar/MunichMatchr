@@ -19,7 +19,7 @@
                   <div
                     v-for="element in currentStepContent"
                     :key="element"
-                    class="card flex justify-center items-center border rounded-lg border-black"
+                    class="card flex justify-center items-center text-center border rounded-lg border-black px-2"
                     @click="toggleSelection(element)"
                     :class="{
                       'border-blue-700 border-2 text-blue-700': selectedItems.includes(element)
