@@ -19,8 +19,8 @@ public class Event {
     @Id
     private String id;
     private String name;
-    private long lat;
-    private long lon;
+    private double lat;
+    private double lon;
     private String description;
 
     private String typeOfEvent;
@@ -49,8 +49,7 @@ public class Event {
 
     public Event() {}
 
-    public Event(String id, String name, long lat, long lon, String description, String typeOfEvent, List<String> interests, List<String> languages, List<String> availability, List<String> accessibility, String date, int duration, List<String> approvedApplicants, List<String> pendingApplicants, List<String> verifiedApplicants, String organisationName) {
-        this.id = id;
+    public Event(String name, double lat, double lon, String description, String typeOfEvent, List<String> interests, List<String> languages, List<String> availability, List<String> accessibility, String date, int duration, List<String> approvedApplicants, List<String> pendingApplicants, List<String> verifiedApplicants, String organisationName) {
         this.name = name;
         this.lat = lat;
         this.lon = lon;
@@ -84,19 +83,19 @@ public class Event {
         this.name = name;
     }
 
-    public long getLat() {
+    public double getLat() {
         return lat;
     }
 
-    public void setLat(long lat) {
+    public void setLat(double lat) {
         this.lat = lat;
     }
 
-    public long getLon() {
+    public double getLon() {
         return lon;
     }
 
-    public void setLon(long lon) {
+    public void setLon(double lon) {
         this.lon = lon;
     }
 
