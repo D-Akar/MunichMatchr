@@ -8,7 +8,7 @@ import { ChevronDownIcon, PlusIcon, MinusIcon } from '@heroicons/vue/20/solid'
 
 //mock events
 const upcomingEvents = ref([
-  { id: 1, name: 'MILF Parade', date: '2024-12-05', location: 'Community Hall' },
+  { id: 1, name: 'Pride Parade', date: '2024-12-05', location: 'Community Hall' },
   { id: 2, name: 'Baking Hour', date: '2024-12-12', location: 'Kitchen Studio' }
 ]);
 

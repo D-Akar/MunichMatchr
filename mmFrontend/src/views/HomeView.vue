@@ -250,6 +250,31 @@
                     </l-marker>
                   </l-map>
                 </div>
+                
+
+            <!-- upcoming -->
+            <div class="border-b border-gray-200 py-4">
+              <Disclosure>
+                <template #default="{ open }">
+                  <DisclosureButton
+                    class="flex justify-between items-center w-full bg-white py-3 text-lg font-medium text-gray-900 hover:bg-gray-50 rounded-md px-4">
+                    <span>Your Upcoming Events</span>
+                    <ChevronDownIcon :class="{ 'rotate-180': open, 'rotate-0': !open }"
+                      class="h-5 w-5 transition-transform duration-300" />
+                  </DisclosureButton>
+                  <DisclosurePanel>
+                    <ul class="space-y-4 pt-4">
+                      <li v-for="event in upcomingEvents" :key="event.id"
+                        class="border rounded-lg p-4 bg-gray-50 shadow-sm hover:shadow-md transition-shadow">
+                        <h3 class="text-lg font-semibold">{{ event.name }}</h3>
+                        <p class="text-gray-600">Date: {{ event.date }}</p>
+                        <p class="text-gray-600">Location: {{ event.location }}</p>
+                      </li>
+                    </ul>
+                  </DisclosurePanel>
+                </template>
+              </Disclosure>
+            </div>
               </div>
             </div>
           </section>
@@ -288,6 +313,12 @@ import {
 import { ref, reactive, watch, onMounted } from "vue";
 import "leaflet/dist/leaflet.css";
 import { LMap, LTileLayer, LMarker, LPopup } from "@vue-leaflet/vue-leaflet";
+
+//mock events
+const upcomingEvents = ref([
+  { id: 1, name: 'Pride Parade', date: '2024-12-05', location: 'Community Hall' },
+  { id: 2, name: 'Baking Hour', date: '2024-12-12', location: 'Kitchen Studio' }
+]);
 
 const selectedFilters = reactive({
   categories: [],
