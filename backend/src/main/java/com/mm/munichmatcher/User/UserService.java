@@ -26,4 +26,8 @@ public class UserService {
     public void deleteUser(String email) {
         userRepository.deleteByEmail(email);
     }
+
+    public List<User>[] getAdminView(String email) {
+
+    }
 }
