@@ -232,7 +232,7 @@
                     :useGlobalLeaflet="false"
                   >
                     <l-tile-layer
-                      url="https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.png"
+                      url="https://tiles.stadiamaps.com/tiles/outdoors/{z}/{x}/{y}{r}.png"
                       layer-type="base"
                       name="Stadia Maps Basemap"
                     ></l-tile-layer>
@@ -250,6 +250,31 @@
                     </l-marker>
                   </l-map>
                 </div>
+                
+
+            <!-- upcoming -->
+            <div class="border-b border-gray-200 py-4">
+              <Disclosure>
+                <template #default="{ open }">
+                  <DisclosureButton
+                    class="flex justify-between items-center w-full bg-white py-3 text-lg font-medium text-gray-900 hover:bg-gray-50 rounded-md px-4">
+                    <span>Your Upcoming Events</span>
+                    <ChevronDownIcon :class="{ 'rotate-180': open, 'rotate-0': !open }"
+                      class="h-5 w-5 transition-transform duration-300" />
+                  </DisclosureButton>
+                  <DisclosurePanel>
+                    <ul class="space-y-4 pt-4">
+                      <li v-for="event in upcomingEvents" :key="event.id"
+                        class="border rounded-lg p-4 bg-gray-50 shadow-sm hover:shadow-md transition-shadow">
+                        <h3 class="text-lg font-semibold">{{ event.name }}</h3>
+                        <p class="text-gray-600">Date: {{ event.date }}</p>
+                        <p class="text-gray-600">Location: {{ event.location }}</p>
+                      </li>
+                    </ul>
+                  </DisclosurePanel>
+                </template>
+              </Disclosure>
+            </div>
               </div>
             </div>
           </section>
@@ -288,6 +313,12 @@ import {
 import { ref, reactive, watch, onMounted } from "vue";
 import "leaflet/dist/leaflet.css";
 import { LMap, LTileLayer, LMarker, LPopup } from "@vue-leaflet/vue-leaflet";
+
+//mock events
+const upcomingEvents = ref([
+  { id: 1, name: 'Pride Parade', date: '2024-12-05', location: 'Community Hall' },
+  { id: 2, name: 'Baking Hour', date: '2024-12-12', location: 'Kitchen Studio' }
+]);
 
 const selectedFilters = reactive({
   categories: [],
@@ -355,16 +386,12 @@ watch(
   { deep: true } // Ensures nested properties are observed
 );
 
-
-const filters = [
+// Initialize filters with a default empty structure
+const filters = ref([
   {
     id: "categories",
     name: "Categories",
-    options: [
-      { value: "1hour", label: "Language Cafes", checked: false },
-      { value: "multiHour", label: "Youth Institute", checked: false },
-      { value: "fullDay", label: "Elderly Care Facility", checked: true },
-    ],
+    options: []
   },
   {
     id: "availability",
@@ -379,25 +406,12 @@ const filters = [
   {
     id: "interestFields",
     name: "Interests",
-    options: [
-      { value: "literature", label: "Literature", checked: false },
-      { value: "sports", label: "Sports", checked: false },
-      { value: "science", label: "Science", checked: true },
-      { value: "history", label: "History", checked: false },
-      { value: "philosophy", label: "Philosophy", checked: false },
-      { value: "travel", label: "Travel", checked: false },
-      { value: "cooking", label: "Cooking", checked: false },
-    ],
+    options: []
   },
   {
     id: "languages",
     name: "Languages",
-    options: [
-      { value: "german", label: "German", checked: false },
-      { value: "englisch", label: "English", checked: false },
-      { value: "turkish", label: "Turkish", checked: false },
-      { value: "...", label: "...", checked: false },
-    ],
+    options: []
   },
   {
     id: "accessibility",
@@ -407,7 +421,56 @@ const filters = [
       { value: "publicTransport", label: "Public transportation nearby", checked: false },
     ],
   },
-];
+]);
+
+const setupFilters = async () => {
+  try {
+    const userEmail = localStorage.getItem('userEmail');
+    if (!userEmail) {
+      console.error('No user email found in localStorage');
+      return;
+    }
+
+    console.log('Fetching data for user:', userEmail); // Debug log
+
+    const response = await fetch(`http://localhost:8080/user/get/${userEmail}`);
+    if (!response.ok) throw new Error('Failed to fetch user data');
+    
+    const userData = await response.json();
+    console.log('Received user data:', userData); // Debug log
+    
+    // Update only the dynamic filters
+    filters.value = filters.value.map(filter => {
+      if (filter.id === 'categories') {
+        console.log('Setting categories from:', userData.preferredTypesOfEvents); // Debug log
+        filter.options = userData.preferredTypesOfEvents.map(type => ({
+          value: type.toLowerCase(),
+          label: type,
+          checked: false
+        }));
+      } else if (filter.id === 'interestFields') {
+        console.log('Setting interests from:', userData.interests); // Debug log
+        filter.options = userData.interests.map(interest => ({
+          value: interest.toLowerCase(),
+          label: interest,
+          checked: false
+        }));
+      } else if (filter.id === 'languages') {
+        console.log('Setting languages from:', userData.languagues); // Debug log
+        filter.options = userData.languagues.map(lang => ({
+          value: lang.toLowerCase(),
+          label: lang,
+          checked: false
+        }));
+      }
+      return filter;
+    });
+
+    console.log('Final filters structure:', filters.value); // Debug log
+  } catch (error) {
+    console.error('Error fetching user data:', error);
+  }
+};
 
 const mobileFiltersOpen = ref(false);
 
@@ -444,6 +507,7 @@ onMounted(() => {
   resetFilters();
   checkPreferences();
   fetchArcades();
+  setupFilters();
 });
 
 // Add this to debug filter changes

@@ -49,11 +49,23 @@ export default {
     }
   },
   methods: {
-    handleLogin() {
-      // In a real application, you would validate credentials here
-      // For now, we'll just set the token
-      localStorage.setItem('isAuthenticated', 'true')
-      this.$router.push('/') // Redirect to home page after login
+    async handleLogin() {
+      try {
+        const response = await fetch(`http://localhost:8080/user/login/${this.email}/${this.password}`);
+        const result = await response.text();
+        
+        if (result === '1') {
+          localStorage.setItem('isAuthenticated', 'true');
+          localStorage.setItem('userEmail', this.email);
+          this.$router.push('/');
+        } else {
+          // Optional: Add error handling for invalid credentials
+          alert('Invalid credentials');
+        }
+      } catch (error) {
+        console.error('Login error:', error);
+        alert('An error occurred during login');
+      }
     }
   }
 }
