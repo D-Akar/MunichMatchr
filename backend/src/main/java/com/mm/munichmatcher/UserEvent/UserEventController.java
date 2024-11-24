@@ -7,6 +7,7 @@ import com.mm.munichmatcher.User.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -23,6 +24,28 @@ public class UserEventController {
     public List<Event> getFilteredEvents(@PathVariable String email) {
         User user = userService.getUserByEmail(email);
         return eventService.getFilteredEvents(user);
+    }
+
+    @GetMapping("/adminView/{email}")
+    public List<String>[] getAdminView(@PathVariable String email) {
+        User user = userService.getUserByEmail(email);
+        if (user == null || user.getIsAdmin() != 1) {
+            return null;
+        }
+
+        List<String>[] adminView = new List[3];
+        for (int i = 0; i < 3; i++) {
+            adminView[i] = new ArrayList<>();
+        }
+
+        List<Event> eventsFromOrganiserList = eventService.getAllEvents().stream().filter(event -> event.getOrganisationName().equals(user.getOrganisationName())).toList();
+        for (Event event : eventsFromOrganiserList) {
+            adminView[0].addAll(event.getPendingApplicants());
+            adminView[1].addAll(event.getApprovedApplicants());
+            adminView[2].addAll(event.getVerifiedApplicants());
+        }
+
+        return adminView;
     }
 
     @PutMapping("/anmeldung/{email}/{eventName}")

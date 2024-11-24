@@ -1,9 +1,11 @@
 package com.mm.munichmatcher.Organisation;
 
+import com.mm.munichmatcher.User.User;
 import org.hibernate.jdbc.Expectation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -17,7 +19,7 @@ public class OrganisationService {
     }
 
     public Organisation getOrgaByEmail(String email) {
-        return organisationRepository.findById(email).orElse(new Organisation());
+        return organisationRepository.findByEmail(email);
     }
 
     public Organisation addOrga(Organisation orga) {
@@ -27,4 +29,5 @@ public class OrganisationService {
     public void deleteUser(String email) {
         organisationRepository.deleteByEmail(email);
     }
+
 }

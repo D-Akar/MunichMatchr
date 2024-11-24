@@ -45,9 +45,11 @@ public class Event {
 
     private List<String> verifiedApplicants;
 
+    private String organisationName;
+
     public Event() {}
 
-    public Event(String id, String name, long lat, long lon, String description, String typeOfEvent, List<String> interests, List<String> languages, List<String> availability, List<String> accessibility, String date, int duration, List<String> approvedApplicants, List<String> pendingApplicants, List<String> verifiedApplicants) {
+    public Event(String id, String name, long lat, long lon, String description, String typeOfEvent, List<String> interests, List<String> languages, List<String> availability, List<String> accessibility, String date, int duration, List<String> approvedApplicants, List<String> pendingApplicants, List<String> verifiedApplicants, String organisationName) {
         this.id = id;
         this.name = name;
         this.lat = lat;
@@ -63,6 +65,7 @@ public class Event {
         this.approvedApplicants = approvedApplicants;
         this.pendingApplicants = pendingApplicants;
         this.verifiedApplicants = verifiedApplicants;
+        this.organisationName = organisationName;
     }
 
     public String getId() {
@@ -183,5 +186,13 @@ public class Event {
 
     public void setVerifiedApplicants(List<String> verifiedApplicants) {
         this.verifiedApplicants = verifiedApplicants;
+    }
+
+    public String getOrganisationName() {
+        return organisationName;
+    }
+
+    public void setOrganisationName(String organisationName) {
+        this.organisationName = organisationName;
     }
 }

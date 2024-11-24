@@ -27,12 +27,12 @@ public class User {
     private String password;
 
     private int isAdmin;
-    private String organisationEmail;
+    private String organisationName;
 
     public User() {
     }
 
-    public User(String email, String name, int eventCounter, List<String> languagues, List<String> interests, List<String> preferredTypesOfEvents, int coins, String password, int isAdmin, String organisationEmail) {
+    public User(String email, String name, int eventCounter, List<String> languagues, List<String> interests, List<String> preferredTypesOfEvents, int coins, String password, int isAdmin, String organisationName) {
         this.email = email;
         this.name = name;
         this.eventCounter = eventCounter;
@@ -42,7 +42,7 @@ public class User {
         this.coins = coins;
         this.password = password;
         this.isAdmin = isAdmin;
-        this.organisationEmail = organisationEmail;
+        this.organisationName = organisationName;
     }
 
     public String getEmail() {
@@ -117,11 +117,11 @@ public class User {
         this.isAdmin = isAdmin;
     }
 
-    public String getOrganisationEmail() {
-        return organisationEmail;
+    public String getOrganisationName() {
+        return organisationName;
     }
 
-    public void setOrganisationEmail(String organisationEmail) {
-        this.organisationEmail = organisationEmail;
+    public void setOrganisationName(String organisationName) {
+        this.organisationName = organisationName;
     }
 }
