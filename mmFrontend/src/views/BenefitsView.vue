@@ -15,7 +15,7 @@ const upcomingEvents = ref([
 
 
 // fetching (mock)
-const points = ref(120) //points
+const points = ref(0) //points
 const availableGifts = ref([
   { id: 3, name: 'Starbucks Coupon', pointsCost: 50, description: '50 % discount for your coffee order', redeemed: false },
   { id: 2, name: 'Book Voucher', pointsCost: 100, description: '20% discount at Hugendubel ', redeemed: false },
@@ -39,6 +39,22 @@ const redeemGift = (giftId) => {
     gift.redeemed = true
   }
 }
+
+onMounted(async () => {
+  try {
+    const userEmail = localStorage.getItem('userEmail')
+    if (!userEmail) {
+      console.error('User email not found in localStorage')
+      return
+    }
+
+    const response = await fetch(`http://localhost:8080/user/get/${userEmail}`)
+    const userData = await response.json()
+    points.value = userData.coins
+  } catch (error) {
+    console.error('Error fetching user points:', error)
+  }
+})
 </script>
 
 <template>
@@ -77,7 +93,7 @@ const redeemGift = (giftId) => {
         </TransitionRoot>
 
         <main class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div class="flex items-baseline justify-between border-b border-gray-200 pb-6 pt-24">
+          <div class="flex items-baseline justify-between border-b border-gray-200 pb-6 pt-2">
             <h1 class="text-4xl font-bold tracking-tight text-gray-900">Your Benefits</h1>
             <div class="text-lg font-semibold text-gray-700">You have {{ points }} points</div>
           </div>

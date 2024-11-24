@@ -1,11 +1,10 @@
-
 <template>
     
     <div
       v-if="isVisible"
       class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-100"
     >
-      <div class="bg-white shadow sm:rounded-lg w-3/5 h-2/3">
+      <div class="bg-white shadow sm:rounded-lg w-3/5 2xl:w-1/2 h-2/3">
         <div class="px-4 py-5 sm:p-6 h-full flex flex-col">
           <h3 class="text-base font-semibold text-gray-900">
             Tell us more about yourself!
@@ -23,7 +22,7 @@
                     class="card flex justify-center items-center border rounded-lg border-black"
                     @click="toggleSelection(element)"
                     :class="{
-                      'bg-blue-200': selectedItems.includes(element)
+                      'border-blue-700 border-2 text-blue-700': selectedItems.includes(element)
                     }"
                   >
                     {{ element }}
@@ -147,6 +146,18 @@
   const emit = defineEmits(['close', 'submit']);
   const currentStepContent = computed(() => stepElements[props.currentStep]);
   
+  const steps = computed(() => {
+    return props.steps.map((step, index) => {
+      if (index < props.currentStep) {
+        return { ...step, status: 'complete' };
+      } else if (index === props.currentStep) {
+        return { ...step, status: 'current' };
+      } else {
+        return { ...step, status: 'future' };
+      }
+    });
+  });
+  
   const goToNextStep = () => {
     if (props.currentStep < props.steps.length - 1) {
       emit('update:currentStep', props.currentStep + 1);
@@ -168,14 +179,15 @@
   };
   
   const submitSelections = () => {
+    console.log(props.selectedItems);
     emit('submit', props.selectedItems);
     emit('close');
   };
   
   const stepElements = {
-    0: ["Literature", "Sports", "Cooking"],
-    1: ["English", "German", "Turkish", "Mandarin", "Vietnamese", "Arabic"],
-    2: ["Elderly Care", "Language Cafes", "Youth Institutions"],
+    0: ["Literature", "Sports", "Cooking", "Art", "Gardening", "Film", "Music", "Hiking"],
+    1: ["English", "German", "Turkish", "Mandarin", "Russian", "Arabic", "French", "Polish"],
+    2: ["Language Café", "Board game nights", "Field trips", "Lunch meets", "Tech Engagement", "Book clubs", "Craft sessions", "Workshops"],
   };
   </script>
   
@@ -191,8 +203,8 @@
   }
   
   .card {
-    width: 150px;
-    height: 150px;
+    width: 125px;
+    height: 125px;
     margin-right: 10px;
     cursor: pointer; 
   }

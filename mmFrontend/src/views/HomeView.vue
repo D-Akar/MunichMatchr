@@ -232,7 +232,7 @@
                     :useGlobalLeaflet="false"
                   >
                     <l-tile-layer
-                      url="https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.png"
+                      url="https://tiles.stadiamaps.com/tiles/outdoors/{z}/{x}/{y}{r}.png"
                       layer-type="base"
                       name="Stadia Maps Basemap"
                     ></l-tile-layer>
@@ -355,16 +355,12 @@ watch(
   { deep: true } // Ensures nested properties are observed
 );
 
-
-const filters = [
+// Initialize filters with a default empty structure
+const filters = ref([
   {
     id: "categories",
     name: "Categories",
-    options: [
-      { value: "1hour", label: "Language Cafes", checked: false },
-      { value: "multiHour", label: "Youth Institute", checked: false },
-      { value: "fullDay", label: "Elderly Care Facility", checked: true },
-    ],
+    options: []
   },
   {
     id: "availability",
@@ -379,25 +375,12 @@ const filters = [
   {
     id: "interestFields",
     name: "Interests",
-    options: [
-      { value: "literature", label: "Literature", checked: false },
-      { value: "sports", label: "Sports", checked: false },
-      { value: "science", label: "Science", checked: true },
-      { value: "history", label: "History", checked: false },
-      { value: "philosophy", label: "Philosophy", checked: false },
-      { value: "travel", label: "Travel", checked: false },
-      { value: "cooking", label: "Cooking", checked: false },
-    ],
+    options: []
   },
   {
     id: "languages",
     name: "Languages",
-    options: [
-      { value: "german", label: "German", checked: false },
-      { value: "englisch", label: "English", checked: false },
-      { value: "turkish", label: "Turkish", checked: false },
-      { value: "...", label: "...", checked: false },
-    ],
+    options: []
   },
   {
     id: "accessibility",
@@ -407,7 +390,56 @@ const filters = [
       { value: "publicTransport", label: "Public transportation nearby", checked: false },
     ],
   },
-];
+]);
+
+const setupFilters = async () => {
+  try {
+    const userEmail = localStorage.getItem('userEmail');
+    if (!userEmail) {
+      console.error('No user email found in localStorage');
+      return;
+    }
+
+    console.log('Fetching data for user:', userEmail); // Debug log
+
+    const response = await fetch(`http://localhost:8080/user/get/${userEmail}`);
+    if (!response.ok) throw new Error('Failed to fetch user data');
+    
+    const userData = await response.json();
+    console.log('Received user data:', userData); // Debug log
+    
+    // Update only the dynamic filters
+    filters.value = filters.value.map(filter => {
+      if (filter.id === 'categories') {
+        console.log('Setting categories from:', userData.preferredTypesOfEvents); // Debug log
+        filter.options = userData.preferredTypesOfEvents.map(type => ({
+          value: type.toLowerCase(),
+          label: type,
+          checked: false
+        }));
+      } else if (filter.id === 'interestFields') {
+        console.log('Setting interests from:', userData.interests); // Debug log
+        filter.options = userData.interests.map(interest => ({
+          value: interest.toLowerCase(),
+          label: interest,
+          checked: false
+        }));
+      } else if (filter.id === 'languages') {
+        console.log('Setting languages from:', userData.languagues); // Debug log
+        filter.options = userData.languagues.map(lang => ({
+          value: lang.toLowerCase(),
+          label: lang,
+          checked: false
+        }));
+      }
+      return filter;
+    });
+
+    console.log('Final filters structure:', filters.value); // Debug log
+  } catch (error) {
+    console.error('Error fetching user data:', error);
+  }
+};
 
 const mobileFiltersOpen = ref(false);
 
@@ -444,6 +476,7 @@ onMounted(() => {
   resetFilters();
   checkPreferences();
   fetchArcades();
+  setupFilters();
 });
 
 // Add this to debug filter changes
