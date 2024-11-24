@@ -13,7 +13,8 @@ public class User {
     @Id
     //private int id;
     private String email;
-    private String name;
+    private String vorname;
+    private String nachname;
 
     private int eventCounter;
 
@@ -32,9 +33,10 @@ public class User {
     public User() {
     }
 
-    public User(String email, String name, int eventCounter, List<String> languagues, List<String> interests, List<String> preferredTypesOfEvents, int coins, String password, int isAdmin, String organisationName) {
+    public User(String email, String vorname, String nachname, int eventCounter, List<String> languagues, List<String> interests, List<String> preferredTypesOfEvents, int coins, String password, int isAdmin, String organisationName) {
         this.email = email;
-        this.name = name;
+        this.vorname = vorname;
+        this.nachname = nachname;
         this.eventCounter = eventCounter;
         this.languagues = languagues;
         this.interests = interests;
@@ -53,12 +55,20 @@ public class User {
         this.email = email;
     }
 
-    public String getName() {
-        return name;
+    public String getVorname() {
+        return vorname;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setVorname(String vorname) {
+        this.vorname = vorname;
+    }
+
+    public String getNachname() {
+        return nachname;
+    }
+
+    public void setNachname(String nachname) {
+        this.nachname = nachname;
     }
 
     public int getEventCounter() {
